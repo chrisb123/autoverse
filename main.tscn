@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Models/character.dae" type="PackedScene" id=1]
-[ext_resource path="res://Camera.gd" type="Script" id=2]
+[ext_resource path="res://Camera.gd" type="Script" id=1]
+[ext_resource path="res://Models/character.dae" type="PackedScene" id=2]
 
 [sub_resource type="SpatialMaterial" id=1]
 
@@ -65,11 +65,7 @@ subdivide_depth = 4
 
 [node name="Node" type="Node" index="0"]
 
-[node name="Character" type="Spatial" parent="." index="0" instance=ExtResource( 1 )]
-
-_sections_unfolded = [ "Transform" ]
-
-[node name="Camera" type="Camera" parent="." index="1"]
+[node name="Camera" type="Camera" parent="." index="0"]
 
 transform = Transform( 1, 0, 0, 0, 0.779686, 0.626171, 0, -0.626171, 0.779686, -0.0429082, 4.60057, 7.57928 )
 keep_aspect = 1
@@ -84,12 +80,12 @@ fov = 70.0
 size = 1.0
 near = 0.05
 far = 100.0
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="DirectionalLight" type="DirectionalLight" parent="." index="2"]
+[node name="DirectionalLight" type="DirectionalLight" parent="." index="1"]
 
-transform = Transform( 1, 0, 0, 0, -0.00896399, 0.99996, 0, -0.99996, -0.00896399, 0, 4.71874, 0 )
+transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5, 0 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0
@@ -98,7 +94,7 @@ light_negative = false
 light_specular = 0.5
 light_bake_mode = 1
 light_cull_mask = -1
-shadow_enabled = false
+shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 1 )
 shadow_bias = 0.1
 shadow_contact = 0.0
@@ -113,8 +109,9 @@ directional_shadow_normal_bias = 0.8
 directional_shadow_bias_split_scale = 0.25
 directional_shadow_depth_range = 0
 directional_shadow_max_distance = 200.0
+_sections_unfolded = [ "Transform" ]
 
-[node name="MeshInstance" type="MeshInstance" parent="." index="3"]
+[node name="MeshInstance" type="MeshInstance" parent="." index="2"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 layers = 1
@@ -129,6 +126,10 @@ lod_max_hysteresis = 0.0
 mesh = SubResource( 2 )
 skeleton = NodePath("..")
 material/0 = null
+_sections_unfolded = [ "Transform" ]
+
+[node name="Character" type="Spatial" parent="." index="3" instance=ExtResource( 2 )]
+
 _sections_unfolded = [ "Transform" ]
 
 

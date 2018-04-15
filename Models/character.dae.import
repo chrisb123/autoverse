@@ -7,10 +7,10 @@ path="res://.import/character.dae-9c73a0aef8ff21c3298bdae743f60540.scn"
 [deps]
 
 source_file="res://Models/character.dae"
-source_md5="d551d12bdb196f1f4b68ee3cd938fdc8"
+source_md5="cf146768b93408e9d592c75f629878f9"
 
 dest_files=[ "res://.import/character.dae-9c73a0aef8ff21c3298bdae743f60540.scn" ]
-dest_md5="b01ea67884a19f8d928f1a1c1c1e5017"
+dest_md5="564baeddb355dfeec4acc3e77799cbe3"
 
 [params]
 
