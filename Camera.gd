@@ -4,7 +4,7 @@ const CAMSPEED = 10
 var RMB = false
 var ray_length = 10000
 var space_state
-var grid = Vector2()
+var grid = Vector3()
 signal grid_set
 
 func _ready():
@@ -58,4 +58,14 @@ func _input(event):
 		elif camrot.x < -85:
 			camrot.x = -85
 		set_rotation_degrees(camrot)
-
+	
+	#A bit more resource intensive, but im guessing acces at all times from anywhere could be beneficial	
+	if event is InputEventMouseMotion:				
+		var from = project_ray_origin(event.position)
+		var to = from + project_ray_normal(event.position) * ray_length
+		var space_state = get_world().direct_space_state
+		var result = space_state.intersect_ray(from,to)
+		if result:
+			grid.x = int(result.position.x)
+			grid.z = int(result.position.z)
+			print(grid)

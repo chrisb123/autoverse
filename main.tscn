@@ -197,6 +197,16 @@ align = 1
 items = [ "Crap Machine", null, false, false, false, 0, 0, null, "", false, "Improved crap Machine", null, false, false, false, 1, 0, null, "", false ]
 script = ExtResource( 4 )
 
+[node name="Character2" parent="GUI/Commands/Build" index="1" instance=ExtResource( 3 )]
+
+visible = false
+_sections_unfolded = [ "Transform" ]
+
+[node name="Character3" parent="GUI/Commands/Build" index="2" instance=ExtResource( 3 )]
+
+visible = false
+_sections_unfolded = [ "Transform" ]
+
 [node name="GridMap" type="GridMap" parent="." index="5"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
@@ -212,7 +222,7 @@ collision_mask = 1
 data = {
 "cells": PoolIntArray(  )
 }
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Cell", "Transform" ]
 __meta__ = {
 "_editor_clip_": 0
 }
