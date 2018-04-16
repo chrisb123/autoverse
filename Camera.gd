@@ -4,6 +4,8 @@ const CAMSPEED = 10
 var RMB = false
 var ray_length = 10000
 var space_state
+var grid = Vector2()
+signal grid_set
 
 func _ready():
 	pass
@@ -28,21 +30,24 @@ func _process(delta):
 		pos.y = 0
 	set_translation(pos)
 
+func get_grid():
+	return grid
+
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.get_button_index() == 2 and event.is_pressed():
 			RMB = true
 		elif event.get_button_index() == 2 and not event.is_pressed():
 			RMB = false
-		elif event.get_button_index() == 1 and event.is_pressed():
+		elif event.get_button_index() == 1 and event.is_pressed() and Input.is_action_pressed("ui_select"):
 			var from = project_ray_origin(event.position)
 			var to = from + project_ray_normal(event.position) * ray_length
 			var space_state = get_world().direct_space_state
 			var result = space_state.intersect_ray(from,to)
 			if result:
-				var x = int(result.position.x)
-				var y = int(result.position.z)
-				print("Grid: ",x,",",y)
+				grid.x = int(result.position.x)
+				grid.y = int(result.position.z)
+				emit_signal("grid_set")
 	elif event is InputEventMouseMotion and RMB:
 		var rot = event.get_relative()
 		var camrot = get_rotation_degrees()
@@ -53,3 +58,4 @@ func _input(event):
 		elif camrot.x < -85:
 			camrot.x = -85
 		set_rotation_degrees(camrot)
+

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Camera.gd" type="Script" id=1]
-[ext_resource path="res://Models/character.dae" type="PackedScene" id=2]
-[ext_resource path="res://Build.gd" type="Script" id=3]
+[ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://Camera.gd" type="Script" id=2]
+[ext_resource path="res://Models/character.dae" type="PackedScene" id=3]
+[ext_resource path="res://Build.gd" type="Script" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
 
@@ -70,6 +71,8 @@ plane = Plane( 0, 1, 0, 0 )
 
 [node name="Main" type="Node" index="0"]
 
+script = ExtResource( 1 )
+
 [node name="Camera" type="Camera" parent="." index="0"]
 
 transform = Transform( 1, 0, 0, 0, 0.779686, 0.626171, 0, -0.626171, 0.779686, -0.0429082, 4.60057, 7.57928 )
@@ -85,7 +88,7 @@ fov = 70.0
 size = 1.0
 near = 0.05
 far = 100.0
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="DirectionalLight" type="DirectionalLight" parent="." index="1"]
@@ -133,7 +136,7 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
 
-[node name="Character" parent="." index="3" instance=ExtResource( 2 )]
+[node name="Character" parent="." index="3" instance=ExtResource( 3 )]
 
 _sections_unfolded = [ "Transform" ]
 
@@ -192,7 +195,7 @@ text = "Build"
 flat = false
 align = 1
 items = [ "Crap Machine", null, false, false, false, 0, 0, null, "", false, "Improved crap Machine", null, false, false, false, 1, 0, null, "", false ]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="GridMap" type="GridMap" parent="." index="5"]
 
@@ -214,8 +217,9 @@ __meta__ = {
 "_editor_clip_": 0
 }
 
-[node name="StaticBody" type="StaticBody" parent="GridMap" index="0"]
+[node name="StaticBody" type="StaticBody" parent="." index="6"]
 
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 input_ray_pickable = true
 input_capture_on_drag = false
 collision_layer = 1
@@ -225,7 +229,7 @@ bounce = 0.0
 constant_linear_velocity = Vector3( 0, 0, 0 )
 constant_angular_velocity = Vector3( 0, 0, 0 )
 
-[node name="CollisionShape" type="CollisionShape" parent="GridMap/StaticBody" index="0"]
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
 
 shape = SubResource( 3 )
 disabled = false
