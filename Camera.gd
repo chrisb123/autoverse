@@ -28,11 +28,12 @@ func _process(delta):
 
 func _input(event):
 	if event is InputEventMouseButton:
-#       print("Mouse Click/Unclick at: ", event.position)
 		if event.get_button_index() == 2 and event.is_pressed():
 			RMB = true
 		elif event.get_button_index() == 2 and not event.is_pressed():
 			RMB = false
+		elif event.get_button_index() == 1 and event.is_pressed():
+			print("LMB click")
 	elif event is InputEventMouseMotion and RMB:
 		var rot = event.get_relative()
 		var camrot = get_rotation_degrees()
