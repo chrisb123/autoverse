@@ -39,9 +39,10 @@ func _input(event):
 			var to = from + project_ray_normal(event.position) * ray_length
 			var space_state = get_world().direct_space_state
 			var result = space_state.intersect_ray(from,to)
-			var x = int(result.position.x)
-			var y = int(result.position.z)
-			print("Grid: ",x,",",y)
+			if result:
+				var x = int(result.position.x)
+				var y = int(result.position.z)
+				print("Grid: ",x,",",y)
 	elif event is InputEventMouseMotion and RMB:
 		var rot = event.get_relative()
 		var camrot = get_rotation_degrees()
