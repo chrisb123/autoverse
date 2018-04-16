@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Camera.gd" type="Script" id=1]
 [ext_resource path="res://Models/character.dae" type="PackedScene" id=2]
@@ -63,6 +63,10 @@ material = SubResource( 1 )
 size = Vector2( 10, 10 )
 subdivide_width = 4
 subdivide_depth = 4
+
+[sub_resource type="PlaneShape" id=3]
+
+plane = Plane( 0, 1, 0, 0 )
 
 [node name="Main" type="Node" index="0"]
 
@@ -209,5 +213,21 @@ _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_editor_clip_": 0
 }
+
+[node name="StaticBody" type="StaticBody" parent="GridMap" index="0"]
+
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 1
+collision_mask = 1
+friction = 1.0
+bounce = 0.0
+constant_linear_velocity = Vector3( 0, 0, 0 )
+constant_angular_velocity = Vector3( 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="GridMap/StaticBody" index="0"]
+
+shape = SubResource( 3 )
+disabled = false
 
 
