@@ -128,7 +128,7 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
 
-[node name="Character" type="Spatial" parent="." index="3" instance=ExtResource( 2 )]
+[node name="Character" parent="." index="3" instance=ExtResource( 2 )]
 
 _sections_unfolded = [ "Transform" ]
 
