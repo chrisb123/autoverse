@@ -7,7 +7,7 @@ path="res://.import/belt.dae-4c75cbb9c216dd1369abcf8c600cbb5c.scn"
 [deps]
 
 source_file="res://Models/belt.dae"
-source_md5="5d8b1e48a854d22cf3c6ced51bc72435"
+source_md5="1babcf3841345dd235ddeb60bad237e0"
 
 dest_files=[ "res://.import/belt.dae-4c75cbb9c216dd1369abcf8c600cbb5c.scn" ]
 dest_md5="c7ccdf4f1c5df87cc7344ca32d317244"
