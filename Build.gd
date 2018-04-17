@@ -19,6 +19,7 @@ func _on_item_pressed(ID):
 	#print(ID, "  ", popup.get_item_text(ID))
 	#print(camera.get_grid())
 	_get_object(ID)
+	camera.set_placement(true)
 	placing_item = true
 	
 func _process(delta):
@@ -46,6 +47,7 @@ func _check_place_item():
 	pass		
 
 func _reset_build(): #todo
+	camera.set_placement(false)
 	placing_item = false
 	pass
 	

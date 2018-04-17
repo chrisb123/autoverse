@@ -5,7 +5,9 @@ var RMB = false
 var ray_length = 10000
 var space_state
 var grid = Vector3()
-signal grid_set
+var grid_select = Vector3()
+signal grid_selected
+var placement
 
 func _ready():
 	pass
@@ -30,8 +32,14 @@ func _process(delta):
 		pos.y = 0
 	set_translation(pos)
 
+func get_grid_select():
+	return grid_select
+
 func get_grid():
 	return grid
+	
+func set_placement(place):
+	placement = place
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -45,9 +53,10 @@ func _input(event):
 			var space_state = get_world().direct_space_state
 			var result = space_state.intersect_ray(from,to)
 			if result:
-				grid.x = int(result.position.x)
-				grid.y = int(result.position.z)
-				emit_signal("grid_set")
+				grid_select.x = int(result.position.x)
+				grid_select.y = int(result.position.y)
+				grid_select.z = int(result.position.z)
+				emit_signal("grid_selected")
 	elif event is InputEventMouseMotion and RMB:
 		var rot = event.get_relative()
 		var camrot = get_rotation_degrees()
@@ -60,7 +69,7 @@ func _input(event):
 		set_rotation_degrees(camrot)
 	
 	#A bit more resource intensive, but im guessing acces at all times from anywhere could be beneficial	
-	if event is InputEventMouseMotion:				
+	elif event is InputEventMouseMotion and placement:
 		var from = project_ray_origin(event.position)
 		var to = from + project_ray_normal(event.position) * ray_length
 		var space_state = get_world().direct_space_state
