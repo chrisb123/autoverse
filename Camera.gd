@@ -38,7 +38,7 @@ func get_grid_select():
 func get_grid():
 	return grid
 	
-func set_placement(place):
+func set_placement(place): #setting placement
 	placement = place
 
 func _input(event):
@@ -69,6 +69,7 @@ func _input(event):
 		set_rotation_degrees(camrot)
 	
 	#A bit more resource intensive, but im guessing acces at all times from anywhere could be beneficial	
+	#Only processes when placment is set
 	elif event is InputEventMouseMotion and placement:
 		var from = project_ray_origin(event.position)
 		var to = from + project_ray_normal(event.position) * ray_length
