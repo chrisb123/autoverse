@@ -11,10 +11,11 @@ var object_id
 onready var camera = get_node("/root/Main/Camera")
 var factory1 = load("res://Models/factory1.dae")
 var factory2 = load("res://Models/factory2.dae")
-
+var belt = load("res://Models/belt.dae")
 
 func _ready():
 	popup = get_popup()
+	popup.add_item("Crap Belt")
 	popup.connect("id_pressed", self, "_on_item_pressed")
 
 func _on_item_pressed(ID):
@@ -33,6 +34,8 @@ func _get_object(object_id):
 		object_to_place = factory1.instance()
 	elif object_id == 1:
 		object_to_place = factory2.instance()
+	elif object_id == 2:
+		object_to_place = belt.instance()
 	add_child(object_to_place)
 	return object_to_place # ??? Youre not assign this return to anything when called above ???
 
@@ -71,9 +74,9 @@ func _input(event):
 		elif event.get_button_index() == 2 and event.is_pressed():
 			_cancel_build()
 		elif event.get_button_index() == 4:
-			print("rotate right")
+			object_to_place.rotation_degrees.y += 45
 		elif event.get_button_index() == 5:
-			print("rotate cleft")
+			object_to_place.rotation_degrees.y -= 45
 
 
 	
