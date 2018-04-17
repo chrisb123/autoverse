@@ -9,6 +9,8 @@ var placing_item
 var object_to_place
 var object_id
 onready var camera = get_node("/root/Main/Camera")
+var factory1 = load("res://Models/factory1.dae")
+var factory2 = load("res://Models/factory2.dae")
 
 
 func _ready():
@@ -18,7 +20,7 @@ func _ready():
 func _on_item_pressed(ID):
 	#print(ID, "  ", popup.get_item_text(ID))
 	#print(camera.get_grid())
-	_get_object(ID)
+	_get_object(ID) # ??? huh ??? not assigned to anything
 	camera.set_placement(true) #set placment flag in camera
 	placing_item = true
 	
@@ -28,10 +30,11 @@ func _process(delta):
 
 func _get_object(object_id):
 	if object_id == 0:
-		object_to_place = get_node("Character2")
+		object_to_place = factory1.instance()
 	elif object_id == 1:
-		object_to_place = get_node("Character3")	
-	return object_to_place
+		object_to_place = factory2.instance()
+	add_child(object_to_place)
+	return object_to_place # ??? Youre not assign this return to anything when called above ???
 
 func _get_grid(object_to_place):
 		object_to_place.visible = true
@@ -62,12 +65,15 @@ func _cancel_build(): #todo
 #MOUSE CONTROLS
 
 func _input(event):
-	if placing_item:
-		if event is InputEventMouseButton:
-			if event.get_button_index() == 1 and event.is_pressed():
-				_check_place_item()
-			if event.get_button_index() == 2 and event.is_pressed():
-				_cancel_build()
+	if event is InputEventMouseButton and placing_item: #use and dont nest inside another if statement
+		if event.get_button_index() == 1 and event.is_pressed():
+			_check_place_item()
+		elif event.get_button_index() == 2 and event.is_pressed():
+			_cancel_build()
+		elif event.get_button_index() == 4:
+			print("rotate right")
+		elif event.get_button_index() == 5:
+			print("rotate cleft")
 
 
 	

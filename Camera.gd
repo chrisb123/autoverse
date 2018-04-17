@@ -28,8 +28,8 @@ func _process(delta):
 		pos.y -= delta * CAMSPEED
 	translate_object_local(pos)
 	pos = get_translation()
-	if pos.y < 0:
-		pos.y = 0
+	if pos.y < 0.1:
+		pos.y = 0.1
 	set_translation(pos)
 
 func get_grid_select():
@@ -77,5 +77,6 @@ func _input(event):
 		var result = space_state.intersect_ray(from,to)
 		if result:
 			grid.x = int(result.position.x)
+			grid.y = int(result.position.y)
 			grid.z = int(result.position.z)
-			print(grid)
+			
