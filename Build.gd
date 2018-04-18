@@ -46,14 +46,14 @@ func _get_grid(object_to_place):
 		object_to_place.translation.z = camera._get_grid().z #should probably use 3 values
 		
 func _check_place_object():
-	if grid_map._is_grid_empty(object_to_place.translation.x, object_to_place.translation.z,object_size): # true is always implied when there is no comparison
+	if grid_map._is_grid_empty(object_to_place.translation.x, object_to_place.translation.y, object_to_place.translation.z,object_size): # true is always implied when there is no comparison
 		_place_object_allowed()
 	else:
 		_place_object_error()
 
 func _place_object_allowed():
 	print("----- GRID EMPTY -----")	
-	grid_map._set_grid_contents(object_to_place.translation.x, object_to_place.translation.z, 1, object_size) #todo test value, change to obj id
+	grid_map._set_grid_contents(object_to_place.translation.x, object_to_place.translation.y, object_to_place.translation.z, 1, object_size) #todo test value, change to obj id
 	_reset_build()
 		
 func _place_object_error():
