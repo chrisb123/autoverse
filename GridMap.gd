@@ -14,7 +14,7 @@ func _ready():
 			grid_map[x].append(0)
 
 func _is_grid_empty(x,y,size): #use 'is' not 'get' for boolean requests
-	if grid_map[x][y] == 0 and size == 1:
+	if grid_map[x][y] == 0 and size == 1: #negative indexes dont work...
 		return true
 	elif grid_map[x][y] == 0 and grid_map[x+1][y] == 0 and grid_map[x][y-1] == 0 and grid_map[x+1][y-1] == 0 and size == 2: #terrible method
 		return true

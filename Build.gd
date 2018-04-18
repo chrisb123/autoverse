@@ -32,7 +32,7 @@ func _on_item_pressed(object_id):
 	elif object_id == 2:
 		object_to_place = belt.instance()
 		object_size = 1
-	add_child(object_to_place)
+	grid_map.add_child(object_to_place)
 	camera._set_placement(true) #set placment flag in camera
 	placing_item = true
 	
@@ -42,6 +42,7 @@ func _process(delta):
 
 func _get_grid(object_to_place):
 		object_to_place.translation.x = camera._get_grid().x
+		object_to_place.translation.y = camera._get_grid().y
 		object_to_place.translation.z = camera._get_grid().z #should probably use 3 values
 		
 func _check_place_object():

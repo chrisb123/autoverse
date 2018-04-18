@@ -209,7 +209,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="GridMap" type="GridMap" parent="." index="5"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 theme = null
 cell_size = Vector3( 2, 2, 2 )
 cell_octant_size = 8
