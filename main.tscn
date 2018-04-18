@@ -197,13 +197,23 @@ align = 1
 items = [ "Crap Machine", null, false, false, false, 0, 0, null, "", false, "Improved crap Machine", null, false, false, false, 1, 0, null, "", false ]
 script = ExtResource( 4 )
 
+[node name="Character2" parent="GUI/Commands/Build" index="1" instance=ExtResource( 3 )]
+
+visible = false
+_sections_unfolded = [ "Transform" ]
+
+[node name="Character3" parent="GUI/Commands/Build" index="2" instance=ExtResource( 3 )]
+
+visible = false
+_sections_unfolded = [ "Transform" ]
+
 [node name="GridMap" type="GridMap" parent="." index="5"]
 
 theme = null
 cell_size = Vector3( 2, 2, 2 )
 cell_octant_size = 8
-cell_center_x = false
-cell_center_y = false
+cell_center_x = true
+cell_center_y = true
 cell_center_z = true
 cell_scale = 1.0
 collision_layer = 1
