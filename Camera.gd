@@ -32,13 +32,13 @@ func _process(delta):
 		pos.y = 0.1
 	set_translation(pos)
 
-func get_grid_select():
+func _get_grid_select():
 	return grid_select
 
-func get_grid():
+func _get_grid():
 	return grid
 	
-func set_placement(place): #setting placement
+func _set_placement(place): #setting placement
 	placement = place
 
 func _input(event):
