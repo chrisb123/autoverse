@@ -62,7 +62,7 @@ func _place_object_error():
 #	_reset_build()
 	
 func _cancel_build(): #todo
-	remove_child(object_to_place)	
+	grid_map.remove_child(object_to_place)	
 	_reset_build()
 	pass	
 
