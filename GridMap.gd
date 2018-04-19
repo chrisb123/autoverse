@@ -20,8 +20,9 @@ func _is_grid_empty(pos,size): #use 'is' not 'get' for boolean requests
 	else:
 		return true
 
-func _set_grid_contents(pos,object_to_add,size):
-	grid_map[pos] = object_to_add
+func _set_grid_contents(object,size):
+	grid_map[object.translation] = object
+	print(grid_map)
 
 
 #func _process(delta):

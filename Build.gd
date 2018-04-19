@@ -51,7 +51,7 @@ func _check_place_object():
 
 func _place_object_allowed():
 	print("----- GRID EMPTY -----")	
-	grid_map._set_grid_contents(object_to_place.translation, 1, object_size) #todo test value, change to obj id
+	grid_map._set_grid_contents(object_to_place, object_size) #todo test value, change to obj id
 	_reset_build()
 		
 func _place_object_error():
