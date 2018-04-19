@@ -4,13 +4,15 @@
 [ext_resource path="res://Models/belt.dae" type="PackedScene" id=2]
 [ext_resource path="res://Structures/belt.gd" type="Script" id=3]
 
-[node name="Base" type="Spatial" index="0"]
+[node name="Base" type="Spatial" groups=[
+"belt",
+]]
 
 script = ExtResource( 1 )
 size1 = Vector3( 0, 0, 0 )
 size2 = Vector3( 1, 1, 1 )
 
-[node name="Belt" type="Spatial" parent="." index="0" instance=ExtResource( 2 )]
+[node name="Obj" type="Spatial" parent="." index="0" instance=ExtResource( 2 )]
 
 script = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]

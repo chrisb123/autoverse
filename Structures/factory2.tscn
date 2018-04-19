@@ -4,13 +4,16 @@
 [ext_resource path="res://Models/factory2.dae" type="PackedScene" id=2]
 [ext_resource path="res://Structures/factory.gd" type="Script" id=3]
 
-[node name="Base" type="Spatial"]
+[node name="Base" type="Spatial" index="0" groups=[
+"factory",
+]]
 
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 size1 = Vector3( -1, 0, -1 )
-size2 = Vector3( 2, 1, 2 )
+size2 = Vector3( 3, 1, 3 )
 
-[node name="Factory2" type="Spatial" parent="." index="0" instance=ExtResource( 2 )]
+[node name="Obj" type="Spatial" parent="." index="0" instance=ExtResource( 2 )]
 
 script = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]

@@ -1,14 +1,10 @@
 extends MenuButton
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-
 var popup
 var placing_item
 var object_to_place
-var object_size1 = Vector3(1,1,1)
-var object_size2 = Vector3(1,1,1)
+var object_size1 = Vector3()
+var object_size2 = Vector3()
 var object_id
 onready var camera = get_node("/root/Main/Camera")
 onready var grid_map = get_node("/root/Main/GridMap")
@@ -51,7 +47,9 @@ func _check_place_object():
 
 func _place_object_allowed():
 	print("----- GRID EMPTY -----")	
-	grid_map._set_grid_contents(object_to_place, object_size1, object_size2) 
+	grid_map._set_grid_contents(object_to_place, object_size1, object_size2)
+	object_to_place._start() #execute base script methods
+	object_to_place.get_node("Obj")._start() #execute obj specific methods
 	_reset_build()
 		
 func _place_object_error():
