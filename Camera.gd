@@ -41,6 +41,20 @@ func _get_grid():
 func _set_placement(place): #setting placement
 	placement = place
 
+func _mouse_ray(position):
+	var from = project_ray_origin(position)
+	var to = from + project_ray_normal(position) * ray_length
+	var space_state = get_world().direct_space_state
+	var result = space_state.intersect_ray(from,to)
+	return result
+
+func _int_position(input):
+	var out = Vector3()
+	out.x = int(input.x)
+	out.y = int(input.y)
+	out.z = int(input.z)
+	return out
+
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.get_button_index() == 2 and event.is_pressed():
@@ -48,14 +62,9 @@ func _input(event):
 		elif event.get_button_index() == 2 and not event.is_pressed():
 			RMB = false
 		elif event.get_button_index() == 1 and event.is_pressed() and Input.is_action_pressed("ui_select"):
-			var from = project_ray_origin(event.position)
-			var to = from + project_ray_normal(event.position) * ray_length
-			var space_state = get_world().direct_space_state
-			var result = space_state.intersect_ray(from,to)
+			var result = _mouse_ray(event.position)
 			if result:
-				grid_select.x = int(result.position.x)
-				grid_select.y = int(result.position.y)
-				grid_select.z = int(result.position.z)
+				grid_select = _int_position(result.position)
 				emit_signal("grid_selected")
 	elif event is InputEventMouseMotion and RMB:
 		var rot = event.get_relative()
@@ -71,12 +80,6 @@ func _input(event):
 	#A bit more resource intensive, but im guessing acces at all times from anywhere could be beneficial	
 	#Only processes when placment is set
 	elif event is InputEventMouseMotion and placement:
-		var from = project_ray_origin(event.position)
-		var to = from + project_ray_normal(event.position) * ray_length
-		var space_state = get_world().direct_space_state
-		var result = space_state.intersect_ray(from,to)
+		var result = _mouse_ray(event.position)
 		if result:
-			grid.x = int(result.position.x)
-			grid.y = int(result.position.y)
-			grid.z = int(result.position.z)
-			
+			grid = _int_position(result.position)
