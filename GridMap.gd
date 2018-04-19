@@ -14,11 +14,14 @@ func _ready():
 #		for y in range(height):
 #			grid_map[x].append(0)
 
-func _is_grid_empty(pos,size): #use 'is' not 'get' for boolean requests
-	if grid_map.has(pos): #negative indexes dont work...
-		return false
-	else:
-		return true
+func _is_grid_empty(pos,size1,size2): #use 'is' not 'get' for boolean requests
+	for x in range(size1.x,size2.x):
+		for y in range(size1.y,size2.y):
+			for z in range(size1.z,size2.z):
+				var location = Vector3(pos.x+x,pos.y+y,pos.z+z)
+				if grid_map.has(location): 
+					return false
+	return true
 
 func _set_grid_contents(object,size1,size2):
 	for x in range(size1.x,size2.x):

@@ -31,11 +31,11 @@ func _on_item_pressed(object_id):
 	elif object_id == 1:
 		object_to_place = factory2.instance()
 		object_size1 = Vector3(-1,0,-1)
-		object_size2 = Vector3(2,1,2)
+		object_size2 = Vector3(2,1,2) #When doing more then a single cell add an extra cell e.g. -1 to 1 becomes -1 to 2 
 	elif object_id == 2:
 		object_to_place = belt.instance()
 		object_size1 = Vector3(0,0,0)
-		object_size2 = Vector3(1,1,1)
+		object_size2 = Vector3(1,1,1) #single cell use 0-1
 	grid_map.add_child(object_to_place)
 	camera._set_placement(true) #set placment flag in camera
 	placing_item = true
@@ -48,7 +48,7 @@ func _get_grid(object_to_place):
 	object_to_place.translation = camera._get_grid()
 		
 func _check_place_object():
-	if grid_map._is_grid_empty(object_to_place.translation, object_size1): # true is always implied when there is no comparison
+	if grid_map._is_grid_empty(object_to_place.translation, object_size1, object_size2): # true is always implied when there is no comparison
 		_place_object_allowed()
 	else:
 		_place_object_error()
