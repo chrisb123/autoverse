@@ -12,9 +12,9 @@ var object_size2 = Vector3(1,1,1)
 var object_id
 onready var camera = get_node("/root/Main/Camera")
 onready var grid_map = get_node("/root/Main/GridMap")
-var factory1 = load("res://Models/factory1.dae")
-var factory2 = load("res://Models/factory2.dae")
-var belt = load("res://Models/belt.dae")
+var factory1 = load("res://Structures/factory1.tscn")
+var factory2 = load("res://Structures/factory2.tscn")
+var belt = load("res://Structures/belt.tscn")
 
 func _ready():
 	popup = get_popup()
