@@ -20,8 +20,12 @@ func _is_grid_empty(pos,size): #use 'is' not 'get' for boolean requests
 	else:
 		return true
 
-func _set_grid_contents(object,size):
-	grid_map[object.translation] = object
+func _set_grid_contents(object,size1,size2):
+	for x in range(size1.x,size2.x):
+		for y in range(size1.y,size2.y):
+			for z in range(size1.z,size2.z):
+				var location = Vector3(object.translation.x+x,object.translation.y+y,object.translation.z+z)
+				grid_map[location] = object
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
