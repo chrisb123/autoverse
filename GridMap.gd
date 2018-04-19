@@ -22,8 +22,6 @@ func _is_grid_empty(pos,size): #use 'is' not 'get' for boolean requests
 
 func _set_grid_contents(object,size):
 	grid_map[object.translation] = object
-	print(grid_map)
-
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

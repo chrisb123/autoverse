@@ -7,7 +7,7 @@ extends MenuButton
 var popup
 var placing_item
 var object_to_place
-var object_size = Vector3()
+var object_size = Vector3(0,0,0)
 var object_id
 onready var camera = get_node("/root/Main/Camera")
 onready var grid_map = get_node("/root/Main/GridMap")
@@ -51,7 +51,7 @@ func _check_place_object():
 
 func _place_object_allowed():
 	print("----- GRID EMPTY -----")	
-	grid_map._set_grid_contents(object_to_place, object_size) #todo test value, change to obj id
+	grid_map._set_grid_contents(object_to_place, object_size) 
 	_reset_build()
 		
 func _place_object_error():
@@ -81,6 +81,3 @@ func _input(event):
 			object_to_place.rotation_degrees.y += 45
 		elif event.get_button_index() == 5:
 			object_to_place.rotation_degrees.y -= 45
-
-
-	
