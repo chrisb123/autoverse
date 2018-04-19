@@ -18,9 +18,11 @@ func _ready():
 func _start():
 	position = translation
 	print("Base: The generic object script")
+	
+	#Example of getting contents of grid
 	position.x += size2.x + size1.x
 	var obj = grid_map._get_grid_contents(position)
 	if obj:
 		print("The object to the right belongs to group:",obj.get_groups())
 		print("The object ID is:",obj)
-	
+
