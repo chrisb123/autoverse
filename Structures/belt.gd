@@ -17,10 +17,18 @@ func _ready():
 
 func _start():
 	print("Obj: The belt specific script")
+
+# 1,2,3 below is for a constant flow of material and is basically how i was considering doing it, however i would add  
+# a local inventory variable.  input -> inventory -> Output
+# it needs to be checked if an invetory can be given to next Factory/Conveyor or if there is even something to give it to, otherwise it has
+# to hold object in invetory and when it cant give move its invetory to next conveyor it needs to tell previous conveyor 
+# it cannot accept what its trying to give. all the way back to the end of the chain.
+# this is the really tricky part
 	
 #use rotation to find this belts inpuit and output
 #example of how belts could work
 #have a loop that basically feeds itelf
+	#If Output block is Factory, Box, Conveyor AND accepts Resource type AND Output inventory is not full 
 #1. send output_data to output_node: belt,factory
 #wait
 #2. transfer input_data to output_data

@@ -48,6 +48,7 @@ func _check_place_object():
 func _place_object_allowed():
 	print("----- GRID EMPTY -----")	
 	grid_map._set_grid_contents(object_to_place, object_size1, object_size2)
+	object_to_place._set_facing(object_to_place.rotation_degrees.y)
 	object_to_place._start() #execute base script methods
 	object_to_place.get_node("Obj")._start() #execute obj specific methods
 	_reset_build()
@@ -70,12 +71,17 @@ func _reset_build(): #todo
 #MOUSE CONTROLS
 
 func _input(event):
-	if event is InputEventMouseButton and placing_item: #use and dont nest inside another if statement
-		if event.get_button_index() == 1 and event.is_pressed():
+	if event is InputEventMouseButton and placing_item and event.is_pressed(): #use and dont nest inside another if statement
+		if event.get_button_index() == 1:
 			_check_place_object()
-		elif event.get_button_index() == 2 and event.is_pressed():
+		elif event.get_button_index() == 2:
 			_cancel_build()
-		elif event.get_button_index() == 4:
-			object_to_place.rotation_degrees.y += 45
-		elif event.get_button_index() == 5:
-			object_to_place.rotation_degrees.y -= 45
+		elif event.get_button_index() == 4:		#needs is pressed otherwise processes multiple times
+			object_to_place.rotation_degrees.y += 90
+			if object_to_place.rotation_degrees.y >= 360:
+				object_to_place.rotation_degrees.y = 0
+		elif event.get_button_index() == 5: 	#needs is pressed otherwise processes multiple times
+			object_to_place.rotation_degrees.y -= 90
+			if object_to_place.rotation_degrees.y <= -90:
+				object_to_place.rotation_degrees.y = 270
+		#object_to_place.rotation_degrees.y = round(object_to_place.rotation_degrees.y) #reduces inaccuracy creeping in. 360 and below degrees seems to not be needed
