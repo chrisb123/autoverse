@@ -13,7 +13,5 @@ func _ready():
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	pass
-
 func _start():
-	print("Obj: The factory specific script, Finding and linking feeders")
-	
+	print("Obj: The spliter specific script")

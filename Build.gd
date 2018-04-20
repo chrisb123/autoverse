@@ -10,15 +10,19 @@ onready var camera = get_node("/root/Main/Camera")
 onready var grid_map = get_node("/root/Main/GridMap")
 var factory1 = load("res://Structures/factory1.tscn")
 var factory2 = load("res://Structures/factory2.tscn")
+var factory3 = load("res://Structures/factory3.tscn")
 var belt = load("res://Structures/belt.tscn")
 var arm = load("res://Structures/arm.tscn")
 var mine = load("res://Structures/mine.tscn")
+var split = load("res://Structures/split.tscn")
 
 func _ready():
 	popup = get_popup()
 	popup.add_item("Crap Belt")
 	popup.add_item("Feed Arm")
 	popup.add_item("Mine")
+	popup.add_item("Splitter")
+	popup.add_item("Wide Factory")
 	popup.connect("id_pressed", self, "_on_item_pressed")
 
 func _on_item_pressed(object_id):
@@ -34,6 +38,11 @@ func _on_item_pressed(object_id):
 		object_to_place = arm.instance()
 	elif object_id == 4:
 		object_to_place = mine.instance()
+	elif object_id == 5:
+		object_to_place = split.instance()
+	elif object_id == 6:
+		object_to_place = factory3.instance()
+	
 	object_size1 = object_to_place.size1
 	object_size2 = object_to_place.size2
 	grid_map.add_child(object_to_place)

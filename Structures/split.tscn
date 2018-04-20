@@ -1,20 +1,20 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Structures/base.gd" type="Script" id=1]
-[ext_resource path="res://Models/mine.dae" type="PackedScene" id=2]
-[ext_resource path="res://Structures/mine.gd" type="Script" id=3]
+[ext_resource path="res://Models/split.dae" type="PackedScene" id=2]
+[ext_resource path="res://Structures/split.gd" type="Script" id=3]
 
-[node name="Base" type="Spatial" groups=[
-"mine",
+[node name="Base" type="Spatial" index="0" groups=[
+"belt",
 ]]
 
 script = ExtResource( 1 )
 size1 = Vector3( -1, 0, -1 )
-size2 = Vector3( 3, 1, 3 )
+size2 = Vector3( 1, 1, 2 )
 
 [node name="Obj" type="Spatial" parent="." index="0" instance=ExtResource( 2 )]
 
 script = ExtResource( 3 )
-_sections_unfolded = [ "Transform", "Visibility" ]
+_sections_unfolded = [ "Transform" ]
 
 
