@@ -44,20 +44,41 @@ func _start():
 		#print("The object ID is:",obj)
 
 	#Examples of Grid contents with respect to objects facing. only noticable with conveyor
-	if self.is_in_group("belt"):
+	if self.is_in_group("belt") or self.is_in_group("feed"):
 		obj = grid_map._get_grid_contents(translation + facing)
 		if obj:
 			print("The object in FRONT of me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
 			print("The object ID is:",obj)
 			children.append(obj) #add child to children
-			obj._add_parent(self)
+			obj._add_parent(self) #add self as parent to child
 	
 		obj = grid_map._get_grid_contents(translation - facing)
 		if obj:
 			print("The object BEHIND me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
 			print("The object ID is:",obj)
 			parents.append(obj) #add parents to parent
-			obj._add_child(self)
+			obj._add_child(self) #add self as child to parent
+			
+		#Need left/right for added belt as parent to feeders after feeder have already been placed
+		#Need to work out something for factories and mines
+		var facing_temp = facing.rotated(up,deg2rad(90))
+		obj = grid_map._get_grid_contents(translation + facing)
+		if obj:
+			print("The object to LEFT me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
+			print("The object ID is:",obj)
+			obj._add_parent(self) #add self as parent to child
+	
+	
+		facing_temp = facing.rotated(up,deg2rad(-90))
+		obj = grid_map._get_grid_contents(translation + facing)
+		if obj:
+			print("The object to RIGHT me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
+			print("The object ID is:",obj)
+			obj._add_parent(self) #add self as parent to child
+			
+			# Feeder is not a child of a belt but belt is a parent of a feeder
+	
+
 
 	#Set Facing based upon Rotation at placement
 func _set_facing(rotation):

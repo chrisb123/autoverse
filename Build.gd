@@ -11,10 +11,14 @@ onready var grid_map = get_node("/root/Main/GridMap")
 var factory1 = load("res://Structures/factory1.tscn")
 var factory2 = load("res://Structures/factory2.tscn")
 var belt = load("res://Structures/belt.tscn")
+var arm = load("res://Structures/arm.tscn")
+var mine = load("res://Structures/mine.tscn")
 
 func _ready():
 	popup = get_popup()
 	popup.add_item("Crap Belt")
+	popup.add_item("Feed Arm")
+	popup.add_item("Mine")
 	popup.connect("id_pressed", self, "_on_item_pressed")
 
 func _on_item_pressed(object_id):
@@ -26,6 +30,10 @@ func _on_item_pressed(object_id):
 		object_to_place = factory2.instance()
 	elif object_id == 2:
 		object_to_place = belt.instance()
+	elif object_id == 3:
+		object_to_place = arm.instance()
+	elif object_id == 4:
+		object_to_place = mine.instance()
 	object_size1 = object_to_place.size1
 	object_size2 = object_to_place.size2
 	grid_map.add_child(object_to_place)
