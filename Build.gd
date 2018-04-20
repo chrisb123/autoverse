@@ -3,8 +3,6 @@ extends MenuButton
 var popup
 var placing_item
 var object_to_place
-var object_size1 = Vector3()
-var object_size2 = Vector3()
 var object_id
 onready var camera = get_node("/root/Main/Camera")
 onready var grid_map = get_node("/root/Main/GridMap")
@@ -43,8 +41,6 @@ func _on_item_pressed(object_id):
 	elif object_id == 6:
 		object_to_place = factory3.instance()
 	
-	object_size1 = object_to_place.size1
-	object_size2 = object_to_place.size2
 	grid_map.add_child(object_to_place)
 	camera._set_placement(true) #set placment flag in camera
 	placing_item = true
@@ -57,15 +53,15 @@ func _get_grid(object_to_place):
 	object_to_place.translation = camera._get_grid()
 		
 func _check_place_object():
-	if grid_map._is_grid_empty(object_to_place.translation, object_size1, object_size2): # true is always implied when there is no comparison
+	if grid_map._is_grid_empty(object_to_place.translation, object_to_place.size1, object_to_place.size2): # true is always implied when there is no comparison
 		_place_object_allowed()
 	else:
 		_place_object_error()
 
 func _place_object_allowed():
 	print("----- GRID EMPTY -----")	
-	grid_map._set_grid_contents(object_to_place, object_size1, object_size2)
 	object_to_place._set_facing(object_to_place.rotation_degrees.y)
+	grid_map._set_grid_contents(object_to_place)
 	object_to_place._start() #execute base script methods
 	object_to_place.get_node("Obj")._start() #execute obj specific methods
 	_reset_build()

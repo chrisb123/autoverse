@@ -4,7 +4,7 @@
 [ext_resource path="res://Models/split.dae" type="PackedScene" id=2]
 [ext_resource path="res://Structures/split.gd" type="Script" id=3]
 
-[node name="Base" type="Spatial" index="0" groups=[
+[node name="Base" type="Spatial" groups=[
 "belt",
 ]]
 

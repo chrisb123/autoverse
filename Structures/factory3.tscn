@@ -4,7 +4,7 @@
 [ext_resource path="res://Models/factory3.dae" type="PackedScene" id=2]
 [ext_resource path="res://Structures/factory.gd" type="Script" id=3]
 
-[node name="Base" type="Spatial" groups=[
+[node name="Base" type="Spatial" index="0" groups=[
 "factory",
 ]]
 

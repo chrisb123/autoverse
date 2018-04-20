@@ -17,7 +17,9 @@ func _is_grid_empty(pos,size1,size2): #use 'is' not 'get' for boolean requests
 					return false
 	return true
 
-func _set_grid_contents(object,size1,size2):
+func _set_grid_contents(object):
+	var size1 = object.size1
+	var size2 = object.size2
 	size2 = size2 + size1
 	for x in range(size1.x,size2.x):
 		for y in range(size1.y,size2.y):

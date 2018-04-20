@@ -87,7 +87,8 @@ func _set_facing(rotation):
 	elif rotation == 270:
 		facing = Vector3(0,0,1)
 		print("Faces down ", facing)
-		
+
+
 func _obj_flash_start():
 	print("Start object flash:",self)
 	
