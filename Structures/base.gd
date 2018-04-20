@@ -29,11 +29,6 @@ func _add_child(obj):
 	children.append(obj)
 	print("Object added as child:",obj, " Children:", children)
 
-func _get_children():
-	return children
-
-func _get_parents():
-	return parents
 
 func _start():
 	position = translation
@@ -95,5 +90,8 @@ func _set_facing(rotation):
 		facing = Vector3(0,0,1)
 		print("Faces down ", facing)
 		
-		
-
+func _obj_flash_start():
+	print("Start object flash:",self)
+	
+func _obj_flash_stop():
+	print("Stop object flash:",self)

@@ -16,5 +16,8 @@ func _grid_selected():
 	print("Selected ID:",grid_map._get_grid_contents(pos))
 	var obj = grid_map._get_grid_contents(pos)
 	if obj:
-		print("Parents:",obj._get_parents())
-		print("Children:",obj._get_children())
+		print("Group:",obj.get_groups())
+		for i in obj.parents:
+			print("Parents:",i,i.get_groups())
+		for i in obj.children:
+			print("Children:",i,i.get_groups())

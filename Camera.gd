@@ -8,6 +8,9 @@ var grid = Vector3()
 var grid_select = Vector3()
 signal grid_selected
 var placement
+onready var grid_map = get_node("/root/Main/GridMap")
+var obj_old
+
 
 func _ready():
 	pass
@@ -76,10 +79,25 @@ func _input(event):
 		elif camrot.x < -85:
 			camrot.x = -85
 		set_rotation_degrees(camrot)
-	
+	elif event is InputEventMouseMotion and Input.is_action_pressed("ui_select") and not placement:
+		var result = _mouse_ray(event.position)
+		if result:
+			var pos = _int_position(result.position)
+			var obj = grid_map._get_grid_contents(pos)
+			if obj_old != obj:
+				if obj_old:
+					obj_old._obj_flash_stop()
+					obj_old = null
+				if obj:
+					obj._obj_flash_start()
+					obj_old = obj
 	#A bit more resource intensive, but im guessing acces at all times from anywhere could be beneficial	
 	#Only processes when placment is set
 	elif event is InputEventMouseMotion and placement:
 		var result = _mouse_ray(event.position)
 		if result:
 			grid = _int_position(result.position)
+			
+	if Input.is_action_just_released("ui_select") and obj_old:
+		obj_old._obj_flash_stop()
+		obj_old = null
