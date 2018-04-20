@@ -6,6 +6,11 @@ onready var grid_map = get_node("/root/Main/GridMap")
 var position
 var facing = Vector3()
 var up = Vector3(0,1,0)
+var parents = []
+var children = []
+var input_q
+var output_q
+var obj
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -16,50 +21,44 @@ func _ready():
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	pass
+func _add_parent(obj):
+	parents.append(obj)
+	print("Object added as parent:",obj," Parents:",parents)
+
+func _add_child(obj):
+	children.append(obj)
+	print("Object added as child:",obj, " Children:", children)
+
+func _get_children():
+	return children
+
+func _get_parents():
+	return parents
 
 func _start():
 	position = translation
 	print("Base: The generic object script")
-	
-	#Example of getting contents of grid
-	position.x += size2.x #+ size1.x
-	var obj = grid_map._get_grid_contents(position)
+#	var obj = grid_map._get_grid_contents(position)
 	#if obj:
 		#print("The object at physical right belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
 		#print("The object ID is:",obj)
 
 	#Examples of Grid contents with respect to objects facing. only noticable with conveyor
-	position = translation
-	position += facing
-	obj = grid_map._get_grid_contents(position)
-	if obj:
-		print("The object in FRONT of me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
-		print("The object ID is:",obj)
-
-	position = translation
-	position -= facing
-	obj = grid_map._get_grid_contents(position)
-	if obj:
-		print("The object BEHIND me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
-		print("The object ID is:",obj)
-
-	position = translation
-	var facing_temp = facing.rotated(up,deg2rad(90))
-	position += facing_temp
-	obj = grid_map._get_grid_contents(position)
-	if obj:
-		print("The object to LEFT me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
-		print("The object ID is:",obj)
-
-	position = translation
-	facing_temp = facing.rotated(up,deg2rad(-90))
-	position += facing_temp
-	obj = grid_map._get_grid_contents(position)
-	if obj:
-		print("The object to RIGHT me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
-		print("The object ID is:",obj)
+	if self.is_in_group("belt"):
+		obj = grid_map._get_grid_contents(translation + facing)
+		if obj:
+			print("The object in FRONT of me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
+			print("The object ID is:",obj)
+			children.append(obj) #add child to children
+			obj._add_parent(self)
 	
-	
+		obj = grid_map._get_grid_contents(translation - facing)
+		if obj:
+			print("The object BEHIND me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
+			print("The object ID is:",obj)
+			parents.append(obj) #add parents to parent
+			obj._add_child(self)
+
 	#Set Facing based upon Rotation at placement
 func _set_facing(rotation):
 	if rotation == 0:
