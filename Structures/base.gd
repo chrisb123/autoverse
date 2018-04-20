@@ -22,10 +22,14 @@ func _ready():
 #	# Update game logic here.
 #	pass
 func _add_parent(obj):
+	if parents.has(obj):
+		parents.erase(obj)
 	parents.append(obj)
 	print("Object added as parent:",obj," Parents:",parents)
 
 func _add_child(obj):
+	if children.has(obj):
+		children.erase(obj)
 	children.append(obj)
 	print("Object added as child:",obj, " Children:", children)
 
@@ -33,46 +37,40 @@ func _add_child(obj):
 func _start():
 	position = translation
 	print("Base: The generic object script")
-#	var obj = grid_map._get_grid_contents(position)
-	#if obj:
-		#print("The object at physical right belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
-		#print("The object ID is:",obj)
-
-	#Examples of Grid contents with respect to objects facing. only noticable with conveyor
 	if self.is_in_group("belt") or self.is_in_group("feed"):
-		obj = grid_map._get_grid_contents(translation + facing)
-		if obj:
-			print("The object in FRONT of me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
-			print("The object ID is:",obj)
-			children.append(obj) #add child to children
-			obj._add_parent(self) #add self as parent to child
+		_link_fb()
+	if self.is_in_group("belt"):
+		_link_lr()
+
+func _link_fb():
+	obj = grid_map._get_grid_contents(translation + facing)
+	if obj:
+		print("The object in FRONT of me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
+		print("The object ID is:",obj)
+		children.append(obj) #add child to children
+		obj._add_parent(self) #add self as parent to child
+
+	obj = grid_map._get_grid_contents(translation - facing)
+	if obj:
+		print("The object BEHIND me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
+		print("The object ID is:",obj)
+		parents.append(obj) #add parents to parent
+		obj._add_child(self) #add self as child to parent
+
+func _link_lr():
+	var facing_temp = facing.rotated(up,deg2rad(90))
+	obj = grid_map._get_grid_contents(translation + facing)
+	if obj:
+		print("The object to LEFT me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
+		print("The object ID is:",obj)
+		obj._add_parent(self) #add self as parent to child
 	
-		obj = grid_map._get_grid_contents(translation - facing)
-		if obj:
-			print("The object BEHIND me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
-			print("The object ID is:",obj)
-			parents.append(obj) #add parents to parent
-			obj._add_child(self) #add self as child to parent
-			
-		#Need left/right for added belt as parent to feeders after feeder have already been placed
-		#Need to work out something for factories and mines
-		var facing_temp = facing.rotated(up,deg2rad(90))
-		obj = grid_map._get_grid_contents(translation + facing)
-		if obj:
-			print("The object to LEFT me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
-			print("The object ID is:",obj)
-			obj._add_parent(self) #add self as parent to child
-	
-	
-		facing_temp = facing.rotated(up,deg2rad(-90))
-		obj = grid_map._get_grid_contents(translation + facing)
-		if obj:
-			print("The object to RIGHT me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
-			print("The object ID is:",obj)
-			obj._add_parent(self) #add self as parent to child
-			
-			# Feeder is not a child of a belt but belt is a parent of a feeder
-	
+	facing_temp = facing.rotated(up,deg2rad(-90))
+	obj = grid_map._get_grid_contents(translation + facing)
+	if obj:
+		print("The object to RIGHT me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
+		print("The object ID is:",obj)
+		obj._add_parent(self) #add self as parent to child
 
 
 	#Set Facing based upon Rotation at placement

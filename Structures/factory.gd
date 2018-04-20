@@ -15,4 +15,4 @@ func _ready():
 #	pass
 
 func _start():
-	print("Obj: The factory specific script")
+	print("Obj: The factory specific script, Finding and linking feeders")
