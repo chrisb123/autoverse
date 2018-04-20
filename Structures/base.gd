@@ -11,6 +11,7 @@ var children = []
 var input_q
 var output_q
 var obj
+var flashing
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -59,14 +60,14 @@ func _link_fb():
 
 func _link_lr():
 	var facing_temp = facing.rotated(up,deg2rad(90))
-	obj = grid_map._get_grid_contents(translation + facing)
+	obj = grid_map._get_grid_contents(translation + facing_temp)
 	if obj:
 		print("The object to LEFT me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
 		print("The object ID is:",obj)
 		obj._add_parent(self) #add self as parent to child
 	
 	facing_temp = facing.rotated(up,deg2rad(-90))
-	obj = grid_map._get_grid_contents(translation + facing)
+	obj = grid_map._get_grid_contents(translation + facing_temp)
 	if obj:
 		print("The object to RIGHT me belongs to group:",obj.get_groups()) # this is physical right, but not right based upon objects facing
 		print("The object ID is:",obj)
@@ -88,9 +89,14 @@ func _set_facing(rotation):
 		facing = Vector3(0,0,1)
 		print("Faces down ", facing)
 
-
 func _obj_flash_start():
-	print("Start object flash:",self)
-	
+	flashing = true
+	while flashing:
+		visible = false
+		yield(get_tree().create_timer(.25),"timeout")
+		visible = true
+		yield(get_tree().create_timer(.25),"timeout")
+
 func _obj_flash_stop():
-	print("Stop object flash:",self)
+	visible = true
+	flashing = false

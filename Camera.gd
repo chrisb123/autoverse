@@ -53,9 +53,9 @@ func _mouse_ray(position):
 
 func _int_position(input):
 	var out = Vector3()
-	out.x = int(input.x)
-	out.y = int(input.y)
-	out.z = int(input.z)
+	out.x = round(input.x)
+	out.y = round(input.y)
+	out.z = round(input.z)
 	return out
 
 func _input(event):
