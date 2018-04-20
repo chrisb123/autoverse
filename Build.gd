@@ -4,8 +4,11 @@ var popup
 var placing_item
 var object_to_place
 var object_id
+var message_to_add
 onready var camera = get_node("/root/Main/Camera")
 onready var grid_map = get_node("/root/Main/GridMap")
+onready var message_window_vbox = get_node("/root/Main/GUI/MessageWindow/VBox")
+onready var message_window = get_node("/root/Main/GUI/MessageWindow")
 var factory1 = load("res://Structures/factory1.tscn")
 var factory2 = load("res://Structures/factory2.tscn")
 var factory3 = load("res://Structures/factory3.tscn")
@@ -13,6 +16,8 @@ var belt = load("res://Structures/belt.tscn")
 var arm = load("res://Structures/arm.tscn")
 var mine = load("res://Structures/mine.tscn")
 var split = load("res://Structures/split.tscn")
+var message = load("res://Message.tscn")
+
 
 func _ready():
 	popup = get_popup()
@@ -67,7 +72,14 @@ func _place_object_allowed():
 	_reset_build()
 		
 func _place_object_error():
-	print("----- GRID FULL -----")	
+	print("----- GRID FULL -----")
+	#Example of message call
+	message_to_add = message.instance()	
+	message_window_vbox.add_child(message_to_add)
+	message_to_add._initialize(str("Grid ", object_to_place.translation, " occupied!"),"godot",5)
+	yield(get_tree(), "idle_frame")
+	message_window.set_v_scroll(99999999)
+	
 #	remove_child(object_to_place)	#Place it elswhere
 #	_reset_build()
 	
