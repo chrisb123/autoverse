@@ -15,12 +15,11 @@ extends ToolButton
 
 var godot = load("res://Images/icon.png")
 var error = load("res://Images/Error.png")
-
-
+onready var LongTextButton_label = get_node("HBoxContainer/LongTextButton/PopupDialog/Label")
 #func _ready(): 
 #	pass
 
-func _initialize(text,icon,time_to_die):
+func _initialize(text,icon,time_to_die,longtext,zoomgrid,undockable):
 	if text == (""):
 		pass
 	else:
@@ -36,6 +35,15 @@ func _initialize(text,icon,time_to_die):
 	else:
 		$Time_To_Die.wait_time = time_to_die
 		$Time_To_Die.start()
+		
+	$HBoxContainer/LongTextButton._initialize(longtext)
+	$HBoxContainer/ZoomTo._initialize(zoomgrid)
+	$HBoxContainer/Undock._initialize(undockable)
+
+
+
+		
+		
 		
 	
 #func _process(): #no point processing functions that do nothing
