@@ -25,6 +25,8 @@ and the need to process links accounting for arbitrary order of placment. I sugg
 3. Belts have a put location
 4. Factories/mines  have nothing
 
+	ABOVE AGREED
+
 Process goes like this
 Mine just accumlates resources into its inventory
 Factory processes inventory and accumulates products in its inventory
@@ -33,6 +35,14 @@ Belts and feeder puts inventory into whatever is at the put location, factory be
 Belts dont need to get as feeders and belts feed belts
 That should simplify the process, still need to layout arbitrary structures correctly into the gridmap
 Special case items like splitters just have multiple put or get etc as needed
+
+	ABOVE AGREED
+	
+the onlz hard to do thing is when the factory is full of raw resources. the belt will completelzy fill up.
+Once factory accepts new resoures, the belts will restart but in a staggered process as each needs to ensure
+the next is empty before giving the items. assuming the next conveyor will pass on its inventory therefor have free space is
+also not a given. if the factory is full the feeder that "should" have passed its inventory doesnt, thereby screwing up the
+previous conveyors move order that assumed the feeder will pass on its contents.
 
 """
 
