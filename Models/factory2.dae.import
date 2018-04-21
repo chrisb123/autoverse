@@ -7,7 +7,7 @@ path="res://.import/factory2.dae-09436905961517c4a6e94e75b995cb12.scn"
 [deps]
 
 source_file="res://Models/factory2.dae"
-source_md5="651149831759295a8613687dc2dc680c"
+source_md5="abc40c166d4a5c46eaf79542874316ce"
 
 dest_files=[ "res://.import/factory2.dae-09436905961517c4a6e94e75b995cb12.scn" ]
 dest_md5="bc379350b7da9e35c923fe28070a4b8e"

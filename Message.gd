@@ -16,8 +16,9 @@ extends ToolButton
 var godot = load("res://Images/icon.png")
 var error = load("res://Images/Error.png")
 
-func _ready():
-	pass
+
+#func _ready(): 
+#	pass
 
 func _initialize(text,icon,time_to_die):
 	if text == (""):
@@ -37,10 +38,11 @@ func _initialize(text,icon,time_to_die):
 		$Time_To_Die.start()
 		
 	
-func _process():
+#func _process(): #no point processing functions that do nothing
 #	if self.pressed:
 		
-	pass
+#	pass
+
 
 
 func _on_Time_To_Die_timeout():

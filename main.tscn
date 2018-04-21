@@ -72,7 +72,7 @@ subdivide_depth = 4
 
 plane = Plane( 0, 1, 0, 0 )
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -220,7 +220,7 @@ scroll_horizontal = 0
 scroll_vertical_enabled = true
 scroll_vertical = 0
 script = ExtResource( 6 )
-_sections_unfolded = [ "Grow Direction", "Rect", "Scroll" ]
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Scroll", "Size Flags" ]
 
 [node name="VBox" type="VBoxContainer" parent="GUI/MessageWindow" index="0"]
 
