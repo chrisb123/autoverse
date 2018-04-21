@@ -1,14 +1,13 @@
 extends Spatial
 
-var input_node #node that feeds this belt
-var output_node #node to send contents too
 var output_data #input stuff
 var input_data #output stuff
 
-func _ready():
+
+#func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	pass
+#	pass
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
@@ -17,6 +16,26 @@ func _ready():
 
 func _start():
 	print("Obj: The belt specific script")
+
+"""
+Method 2, a big problem with the exisiting parent/child link plan is the requirment to link everything 
+and the need to process links accounting for arbitrary order of placment. I suggest the following:
+1. Remove all the links
+2. Feeders have a put and get grid locations
+3. Belts have a put location
+4. Factories/mines  have nothing
+
+Process goes like this
+Mine just accumlates resources into its inventory
+Factory processes inventory and accumulates products in its inventory
+Feeder gets inventory from a grid location which can be any of the mine/factory/belt etc
+Belts and feeder puts inventory into whatever is at the put location, factory belt etc
+Belts dont need to get as feeders and belts feed belts
+That should simplify the process, still need to layout arbitrary structures correctly into the gridmap
+Special case items like splitters just have multiple put or get etc as needed
+
+"""
+
 
 # 1,2,3 below is for a constant flow of material and is basically how i was considering doing it, however i would add  
 # a local inventory variable.  input -> inventory -> Output
