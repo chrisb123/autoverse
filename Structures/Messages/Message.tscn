@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Message.gd" type="Script" id=1]
-[ext_resource path="res://ExitButton.gd" type="Script" id=2]
+[ext_resource path="res://Structures/Messages/Message.gd" type="Script" id=1]
+[ext_resource path="res://Structures/Messages/ExitButton.gd" type="Script" id=2]
+
+
 
 [node name="ToolButton" type="ToolButton" index="0"]
 

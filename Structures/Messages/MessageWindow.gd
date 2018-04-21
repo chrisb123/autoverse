@@ -4,7 +4,7 @@ extends ScrollContainer
 # var a = 2
 # var b = "textvar"
 
-var message = load("res://Message.tscn")
+var message = load("res://Structures/Messages/Message.tscn")
 
 func _ready():
 	self.rect_size.x = 310
