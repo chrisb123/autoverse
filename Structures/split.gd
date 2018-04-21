@@ -1,17 +1,13 @@
 extends Spatial
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+var input_q = []
+var output_q = []
+var position
+var put = []
+var get = []
 
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
 func _start():
-	print("Obj: The spliter specific script")
+	position = get_parent().translation
+	print("Obj: The splitter specific script")
+	put.append(position + get_parent().facing)
+

@@ -1,21 +1,15 @@
 extends Spatial
 
-var output_data #input stuff
-var input_data #output stuff
-
-
-#func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-#	pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+var input_q = []
+var output_q = []
+var position
+var put = []
+var get = []
 
 func _start():
+	position = get_parent().translation
 	print("Obj: The belt specific script")
+	put.append(position + get_parent().facing)
 
 """
 Method 2, a big problem with the exisiting parent/child link plan is the requirment to link everything 

@@ -1,18 +1,15 @@
 extends Spatial
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+var output_q = []
+var put = []
+var get = []
 
 func _start():
 	print("Obj: The mining specific script")
+	
+
+func _tick1():
+	print("tick1")
+	
+func _tick2():
+	print("tick2")
