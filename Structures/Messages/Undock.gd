@@ -5,7 +5,7 @@ extends Button
 # var b = "textvar"
 
 var UndockWindow = load("res://Structures/Messages/UndockWindow.tscn")
-onready var gui = get_tree().get_root().get_node("/root/Main/GUI")
+onready var gui = get_tree().get_root().get_node("/root/Main/GUI/")
 
 
 func _ready():
@@ -20,11 +20,17 @@ func _initialize(undockable):
 	else:
 		self.show()
 
-func _process(delta):
-	if self.pressed:
-		#add window as child to GUI so message can be deleted, but undocked window stays. 
+func _pressed():
 		var window_to_add = UndockWindow.instance()
 		gui.add_child(window_to_add)
+		#gui.move_child(window_to_add,0)
+		#print(gui.get_children())
+
+#func _process(delta):
+#	if self.pressed:
+#		#add window as child to GUI so message can be deleted, but undocked window stays. 
+#		var window_to_add = UndockWindow.instance()
+#		gui.add_child(window_to_add)
 
 
 #func _process(delta):

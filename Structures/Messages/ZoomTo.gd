@@ -19,9 +19,9 @@ func _initialize(zoomgrid):
 		self.show()
 		zoomgrid_local = zoomgrid
 		
-func _process(delta):
-	if self.pressed:
-		camera.look_at_from_position(zoomgrid_local + Vector3(0,5,5), zoomgrid_local, Vector3(0,1,0))
+
+func _pressed():
+	camera.look_at_from_position(zoomgrid_local + Vector3(0,5,5), zoomgrid_local, Vector3(0,1,0))
 	
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

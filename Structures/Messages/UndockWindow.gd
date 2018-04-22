@@ -6,9 +6,7 @@ extends WindowDialog
 
 func _ready():
 	self.popup()
-	#self.set_exclusive(true)
-	# Called every time the node is added to the scene.
-	# Initialization here
+	set_as_toplevel(false)		#This was a BS Problem to find. defaults true, and when true GUI was disabled
 	pass
 
 #func _process(delta):

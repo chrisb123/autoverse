@@ -6,6 +6,7 @@ extends Control
 
 func _ready():
 	self.rect_size = get_viewport().get_visible_rect().size
+	#set_as_toplevel(true)
 	pass
 
 #func _process(delta):
