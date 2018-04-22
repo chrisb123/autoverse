@@ -25,7 +25,7 @@ func _tick2():
 		var item = input_q.pop_back()
 		if item:
 			output_q.push_front(item)
-	if input_q.size() < 3: #Can be fed from 3 sides
+	if input_q.size() == 0: #Can be fed from 3 sides
 		in_q_full = false
 	else:
 		in_q_full = true
