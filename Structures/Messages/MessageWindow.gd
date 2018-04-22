@@ -13,10 +13,10 @@ func _ready():
 	# Initialization here
 	pass
 
-func _add_msg(msg,icon,time,longtext,zoomgrid,undockable):
+func _add_msg(msg,icon,time,longtext,object_id,undockable):
 	var message_to_add = message.instance()	
 	$VBox.add_child(message_to_add)
-	message_to_add._initialize(msg,icon,time,longtext,zoomgrid,undockable)
+	message_to_add._initialize(msg,icon,time,longtext,object_id,undockable)
 	yield(get_tree(), "idle_frame")
 	set_v_scroll(99999999)
 

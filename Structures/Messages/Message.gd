@@ -19,7 +19,7 @@ onready var LongTextButton_label = get_node("HBoxContainer/LongTextButton/PopupD
 #func _ready(): 
 #	pass
 
-func _initialize(text,icon,time_to_die,longtext,zoomgrid,undockable):
+func _initialize(text,icon,time_to_die,longtext,object_id,undockable):
 	if text == (""):
 		pass
 	else:
@@ -37,8 +37,8 @@ func _initialize(text,icon,time_to_die,longtext,zoomgrid,undockable):
 		$Time_To_Die.start()
 		
 	$HBoxContainer/LongTextButton._initialize(longtext)
-	$HBoxContainer/ZoomTo._initialize(zoomgrid)
-	$HBoxContainer/Undock._initialize(undockable, zoomgrid)
+	$HBoxContainer/ZoomTo._initialize(object_id)
+	$HBoxContainer/Undock._initialize(undockable, object_id,text)
 
 
 
