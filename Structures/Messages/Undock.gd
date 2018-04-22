@@ -4,6 +4,7 @@ extends Button
 # var a = 2
 # var b = "textvar"
 
+var zoomgrid_local
 var UndockWindow = load("res://Structures/Messages/UndockWindow.tscn")
 onready var gui = get_tree().get_root().get_node("/root/Main/GUI/")
 
@@ -14,7 +15,8 @@ func _ready():
 	#$WindowDialog.popup()
 	pass
 
-func _initialize(undockable):
+func _initialize(undockable, zoomgrid):
+	zoomgrid_local = zoomgrid
 	if undockable == false:
 		self.hide()
 	else:
@@ -23,6 +25,7 @@ func _initialize(undockable):
 func _pressed():
 		var window_to_add = UndockWindow.instance()
 		gui.add_child(window_to_add)
+		window_to_add._set_camera(zoomgrid_local)
 		#gui.move_child(window_to_add,0)
 		#print(gui.get_children())
 

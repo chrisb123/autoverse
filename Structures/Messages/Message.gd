@@ -38,7 +38,7 @@ func _initialize(text,icon,time_to_die,longtext,zoomgrid,undockable):
 		
 	$HBoxContainer/LongTextButton._initialize(longtext)
 	$HBoxContainer/ZoomTo._initialize(zoomgrid)
-	$HBoxContainer/Undock._initialize(undockable)
+	$HBoxContainer/Undock._initialize(undockable, zoomgrid)
 
 
 
