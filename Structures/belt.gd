@@ -25,7 +25,7 @@ func _tick2():
 		var item = input_q.pop_back()
 		if item:
 			output_q.push_front(item)
-	if input_q.size() < 1:
+	if input_q.size() < 3: #Can be fed from 3 sides
 		in_q_full = false
 	else:
 		in_q_full = true
@@ -57,34 +57,6 @@ the next is empty before giving the items. assuming the next conveyor will pass 
 also not a given. if the factory is full the feeder that "should" have passed its inventory doesnt, thereby screwing up the
 previous conveyors move order that assumed the feeder will pass on its contents.
 
+
 """
 
-
-# 1,2,3 below is for a constant flow of material and is basically how i was considering doing it, however i would add  
-# a local inventory variable.  input -> inventory -> Output
-# it needs to be checked if an invetory can be given to next Factory/Conveyor or if there is even something to give it to, otherwise it has
-# to hold object in invetory and when it cant give move its invetory to next conveyor it needs to tell previous conveyor 
-# it cannot accept what its trying to give. all the way back to the end of the chain.
-# this is the really tricky part
-	
-#use rotation to find this belts inpuit and output
-#example of how belts could work
-#have a loop that basically feeds itelf
-	#If Output block is Factory, Box, Conveyor AND accepts Resource type AND Output inventory is not full 
-#1. send output_data to output_node: belt,factory
-#wait
-#2. transfer input_data to output_data
-#wait
-#3. repeat
-
-""" no idea how if itll work
-func _loop()
-	loop forever:
-		func child_node._txfr_data(output_data)
-		sleep
-		output_data = input_data
-		sleep
-
-func _txfr_data(data):
-	input_data = data
-"""
