@@ -2,6 +2,7 @@ extends Spatial
 
 var input_q = []
 var output_q = []
+var in_q_full = false
 var position
 var put = []
 var get = []
@@ -22,8 +23,15 @@ func _tick1():
 	if output_q.size() > 0:
 		for i in put:
 			var j = grid_map._get_grid_contents(i)
-			if j:
+			if j and not j.get_node("Obj").in_q_full:
 				j.get_node("Obj").input_q.push_front(output_q.pop_back())
 	
 func _tick2():
-	output_q.push_front(input_q.pop_back())
+	if output_q.size() == 0:
+		var item = input_q.pop_back()
+		if item:
+			output_q.push_front(item)
+	if input_q.size() < 1:
+		in_q_full = false
+	else:
+		in_q_full = true

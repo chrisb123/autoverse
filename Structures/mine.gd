@@ -8,7 +8,7 @@ var get = []
 var resource
 
 func _ready():
-	var i = randi()%2
+	var i = randi()%2 
 	match i:
 		0: resource = global.items.COAL
 		1: resource = global.items.IRON
@@ -21,7 +21,7 @@ func _tick1():
 	pass
 	
 func _tick2():
-	if output_q.size() < 100:
+	if output_q.size() < 10:
 		out_q_full = false
 		output_q.push_front(resource)
 	else:

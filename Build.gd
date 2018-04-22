@@ -42,7 +42,7 @@ func _on_item_pressed(object_id):
 	elif object_id == 6:
 		object_to_place = factory3.instance()
 	
-	grid_map.add_child(object_to_place)
+	add_child(object_to_place)
 	camera._set_placement(true) #set placment flag in camera
 	placing_item = true
 	
@@ -61,6 +61,8 @@ func _check_place_object():
 
 func _place_object_allowed():
 	print("----- GRID EMPTY -----")	
+	remove_child(object_to_place)	
+	grid_map.add_child(object_to_place)
 	object_to_place._set_facing(object_to_place.rotation_degrees.y)
 	grid_map._set_grid_contents(object_to_place)
 	object_to_place._start() #execute base script methods
@@ -78,7 +80,7 @@ func _place_object_error():
 #	_reset_build()
 	
 func _cancel_build(): #todo
-	grid_map.remove_child(object_to_place)	
+	remove_child(object_to_place)	
 	_reset_build()
 	pass	
 
