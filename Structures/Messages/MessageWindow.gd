@@ -12,8 +12,13 @@ func _ready():
 		# Called every time the node is added to the scene.
 	# Initialization here
 	pass
-
-func _add_msg(msg,icon,time,longtext,object_id,undockable):
+#use preset values so you can create function with different number of variables
+#msg is probably the one thing required, the rest are optional
+#order is importan try to sort them in order of importance or use
+#e.g. msg, longtext, object_id, undock, icon, time might be a sugestion, depends what will be used more
+#use null or false avoid using "" empty string
+func _add_msg(msg,icon = "godot",time = 5,longtext = null, object_id = null,undockable = false): 
+	print(longtext)
 	var message_to_add = message.instance()	
 	$VBox.add_child(message_to_add)
 	message_to_add._initialize(msg,icon,time,longtext,object_id,undockable)

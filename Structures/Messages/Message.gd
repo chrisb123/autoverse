@@ -20,37 +20,23 @@ onready var LongTextButton_label = get_node("HBoxContainer/LongTextButton/PopupD
 #	pass
 
 func _initialize(text,icon,time_to_die,longtext,object_id,undockable):
-	if text == (""):
+	if text == null: #where would this be used?
 		pass
 	else:
 		self.text = text
-	if icon == (""):
-		pass
-	else:
-		self.icon = get(icon)
-		self.rect_scale.x = 0.5
-		self.rect_scale.y = 0.5
+	#icon has a default
+	self.icon = get(icon)
+	self.rect_scale.x = 0.5
+	self.rect_scale.y = 0.5
 	if time_to_die == 0:
 		pass
 	else:
 		$Time_To_Die.wait_time = time_to_die
 		$Time_To_Die.start()
-		
+	
 	$HBoxContainer/LongTextButton._initialize(longtext)
 	$HBoxContainer/ZoomTo._initialize(object_id)
 	$HBoxContainer/Undock._initialize(undockable, object_id,text)
-
-
-
-		
-		
-		
-	
-#func _process(): #no point processing functions that do nothing
-#	if self.pressed:
-		
-#	pass
-
 
 
 func _on_Time_To_Die_timeout():

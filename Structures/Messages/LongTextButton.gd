@@ -13,7 +13,7 @@ func _ready():
 	pass
 
 func _initialize(longtext):
-	if longtext == (""):
+	if longtext == null: #use null not an empty string
 		self.hide()
 	else:
 		self.show()

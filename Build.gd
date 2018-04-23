@@ -74,7 +74,8 @@ func _place_object_error():
 	#Example of message call
 	#Put message code in message node and call it all as one function
 	#(Short Text, icon to display, timeout (0s disabled), Longtext ("" = disabled), Object ID,is_undockable)
-	message_window._add_msg(str("Grid ", object_to_place.translation, " occupied!"),"godot",5,"Example long text blah blah blah",object_to_place,true)
+	message_window._add_msg(str("Grid ", object_to_place.translation, " occupied!"),"godot",5,"Example long text blah blah blah",object_to_place,true) #msg with the works
+	message_window._add_msg(str("Grid ", object_to_place.translation, " occupied!")) #basic message with default values
 	
 #	remove_child(object_to_place)	#Place it elswhere
 #	_reset_build()
