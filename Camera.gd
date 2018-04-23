@@ -11,7 +11,6 @@ var placement
 onready var grid_map = get_node("/root/Main/GridMap")
 var obj_old
 
-
 func _ready():
 	pass
 

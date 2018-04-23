@@ -6,12 +6,8 @@
 
 _sections_unfolded = [ "Transform" ]
 
-[node name="Model" type="Spatial" parent="." index="0" instance=ExtResource( 1 )]
+[node name="Model" parent="." index="0" instance=ExtResource( 1 )]
 
 _sections_unfolded = [ "Transform" ]
-
-[node name="Navigation" type="Navigation" parent="." index="1"]
-
-up_vector = Vector3( 0, 1, 0 )
 
 
