@@ -2,9 +2,12 @@ extends Node
 
 onready var camera = get_node("/root/Main/Camera")
 onready var grid_map = get_node("/root/Main/GridMap")
+var character = load("res://character.tscn")
 
 func _ready():
 	camera.connect("grid_selected",self,"_grid_selected")
+	var tmp = character.instance()
+	add_child(tmp)
 	_tick_loop()
 
 func _tick_loop():

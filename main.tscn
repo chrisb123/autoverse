@@ -1,12 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://Camera.gd" type="Script" id=2]
-[ext_resource path="res://Models/character.dae" type="PackedScene" id=3]
-[ext_resource path="res://GUI.gd" type="Script" id=4]
-[ext_resource path="res://Build.gd" type="Script" id=5]
-[ext_resource path="res://Structures/Messages/MessageWindow.gd" type="Script" id=6]
-[ext_resource path="res://GridMap.gd" type="Script" id=7]
+[ext_resource path="res://GUI.gd" type="Script" id=3]
+[ext_resource path="res://Build.gd" type="Script" id=4]
+[ext_resource path="res://Structures/Messages/MessageWindow.gd" type="Script" id=5]
+[ext_resource path="res://GridMap.gd" type="Script" id=6]
 
 [sub_resource type="SpatialMaterial" id=1]
 
@@ -138,11 +137,7 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
 
-[node name="Character" parent="." index="3" instance=ExtResource( 3 )]
-
-_sections_unfolded = [ "Transform" ]
-
-[node name="GUI" type="Control" parent="." index="4"]
+[node name="GUI" type="Control" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -156,7 +151,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 _sections_unfolded = [ "Rect" ]
 
 [node name="Commands" type="HBoxContainer" parent="GUI" index="0"]
@@ -199,7 +194,7 @@ text = "Build"
 flat = false
 align = 1
 items = [ "Crap Machine", null, false, false, false, 0, 0, null, "", false, "Improved crap Machine", null, false, false, false, 1, 0, null, "", false ]
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 
 [node name="MessageWindow" type="ScrollContainer" parent="GUI" index="1"]
 
@@ -219,7 +214,7 @@ scroll_horizontal_enabled = false
 scroll_horizontal = 0
 scroll_vertical_enabled = true
 scroll_vertical = 0
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Scroll", "Size Flags" ]
 
 [node name="VBox" type="VBoxContainer" parent="GUI/MessageWindow" index="0"]
@@ -241,7 +236,7 @@ size_flags_vertical = 3
 alignment = 2
 _sections_unfolded = [ "Grow Direction", "Size Flags" ]
 
-[node name="GridMap" type="GridMap" parent="." index="5"]
+[node name="GridMap" type="GridMap" parent="." index="4"]
 
 theme = null
 cell_size = Vector3( 2, 2, 2 )
@@ -255,13 +250,13 @@ collision_mask = 1
 data = {
 "cells": PoolIntArray(  )
 }
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Cell", "Transform" ]
 __meta__ = {
 "_editor_clip_": 0
 }
 
-[node name="StaticBody" type="StaticBody" parent="." index="6"]
+[node name="StaticBody" type="StaticBody" parent="." index="5"]
 
 input_ray_pickable = true
 input_capture_on_drag = false
