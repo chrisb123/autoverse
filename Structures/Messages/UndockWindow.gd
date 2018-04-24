@@ -5,18 +5,26 @@ extends WindowDialog
 # var b = "textvar"
 
 # ----- Until have a better idea of what we would use such a window for ill leave it at this.
-
+var obj
 
 onready var camera = get_node("HBoxContainer/ViewportContainer/Viewport/TextureRect/Camera")
 onready var labels = get_node("HBoxContainer/VBoxContainer")
 
+func _process(delta):
+	labels.get_node("Label5").text = str("Input Queue: ",obj.get_node("Obj").input_q)
+	labels.get_node("Label6").text = str("Output Queue: ",obj.get_node("Obj").output_q)
+
 func _ready():
+	set_process(false)
 	self.popup()
 	set_as_toplevel(false)		#This was a BS Problem to find. defaults true, and when true GUI was disabled
 
 func _initialize(object_id,text):
+	obj = object_id
 	_set_camera(object_id)
 	_set_labels(object_id,text)
+	
+	
 	
 func _set_camera(object_id):
 	camera.look_at_from_position(object_id.translation + Vector3(0,3,3), object_id.translation, Vector3(0,1,0))
@@ -27,6 +35,7 @@ func _set_labels(object_id,text):
 	labels.get_node("Label2").text = str("Name: ",object_id)
 	labels.get_node("Label3").text = str("Grid Loc: ",object_id.translation)
 	labels.get_node("Label4").text = str("Group Name: ",object_id.get_groups())
+	set_process(true)
 
 	
 	

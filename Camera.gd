@@ -9,7 +9,9 @@ var grid_select = Vector3()
 signal grid_selected
 var placement
 onready var grid_map = get_node("/root/Main/GridMap")
+var UndockWindow = load("res://Structures/Messages/UndockWindow.tscn")
 var obj_old
+var mouse_pos
 
 func _ready():
 	pass
@@ -61,15 +63,22 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.get_button_index() == 2 and event.is_pressed():
 			RMB = true
+			mouse_pos = event.position
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		elif event.get_button_index() == 2 and not event.is_pressed():
 			RMB = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			Input.warp_mouse_position(mouse_pos)
 		elif event.get_button_index() == 1 and event.is_pressed() and Input.is_action_pressed("ui_select"):
 			var result = _mouse_ray(event.position)
 			if result:
 				grid_select = _int_position(result.position)
 				emit_signal("grid_selected")
+				var window_to_add = UndockWindow.instance()
+				add_child(window_to_add)
+				var obj = grid_map._get_grid_contents(grid_select)
+				if obj:
+					window_to_add._initialize(obj, "Shift click window")
 	elif event is InputEventMouseMotion and RMB:
 		var rot = event.get_relative()
 		var camrot = get_rotation_degrees()

@@ -26,8 +26,8 @@ func _grid_selected():
 	print("Selected ID:",grid_map._get_grid_contents(pos))
 	var obj = grid_map._get_grid_contents(pos)
 	if obj:
-		print("Output Queue",obj.get_node("Obj").output_q)
 		print("Input Queue",obj.get_node("Obj").input_q)
+		print("Output Queue",obj.get_node("Obj").output_q)
 		print("Group:",obj.get_groups())
 		for i in obj.get_node("Obj").put:
 			var j = grid_map._get_grid_contents(i)
