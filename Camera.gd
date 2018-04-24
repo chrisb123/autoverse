@@ -61,8 +61,10 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.get_button_index() == 2 and event.is_pressed():
 			RMB = true
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		elif event.get_button_index() == 2 and not event.is_pressed():
 			RMB = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		elif event.get_button_index() == 1 and event.is_pressed() and Input.is_action_pressed("ui_select"):
 			var result = _mouse_ray(event.position)
 			if result:
