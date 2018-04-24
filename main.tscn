@@ -1,11 +1,13 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://Camera.gd" type="Script" id=2]
-[ext_resource path="res://GUI.gd" type="Script" id=3]
-[ext_resource path="res://Build.gd" type="Script" id=4]
-[ext_resource path="res://Structures/Messages/MessageWindow.gd" type="Script" id=5]
-[ext_resource path="res://GridMap.gd" type="Script" id=6]
+[ext_resource path="res://Navigation.gd" type="Script" id=3]
+[ext_resource path="res://NavigationMesh.gd" type="Script" id=4]
+[ext_resource path="res://GUI.gd" type="Script" id=5]
+[ext_resource path="res://Build.gd" type="Script" id=6]
+[ext_resource path="res://Structures/Messages/MessageWindow.gd" type="Script" id=7]
+[ext_resource path="res://GridMap.gd" type="Script" id=8]
 
 [sub_resource type="SpatialMaterial" id=1]
 
@@ -63,15 +65,11 @@ _sections_unfolded = [ "Albedo", "Vertex Color" ]
 
 lightmap_size_hint = Vector2( 1, 1 )
 material = SubResource( 1 )
-size = Vector2( 10, 10 )
+size = Vector2( 500000, 500000 )
 subdivide_width = 4
 subdivide_depth = 4
 
-[sub_resource type="PlaneShape" id=3]
-
-plane = Plane( 0, 1, 0, 0 )
-
-[sub_resource type="NavigationMesh" id=4]
+[sub_resource type="NavigationMesh" id=3]
 
 vertices = PoolVector3Array(  )
 polygons = [  ]
@@ -92,9 +90,12 @@ detail/sample_max_error = 1.0
 filter/low_hanging_obstacles = false
 filter/ledge_spans = false
 filter/filter_walkable_low_height_spans = false
-_sections_unfolded = [ "agent", "cell", "detail", "edge", "filter", "polygon", "region", "sample_partition_type" ]
 
-[node name="Main" type="Node"]
+[sub_resource type="PlaneShape" id=4]
+
+plane = Plane( 0, 1, 0, 0 )
+
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -160,6 +161,18 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
 
+[node name="Navigation" type="Navigation" parent="MeshInstance" index="0"]
+
+up_vector = Vector3( 0, 1, 0 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="mesh" type="NavigationMeshInstance" parent="MeshInstance/Navigation" index="0"]
+
+navmesh = SubResource( 3 )
+enabled = true
+script = ExtResource( 4 )
+
 [node name="GUI" type="Control" parent="." index="3"]
 
 anchor_left = 0.0
@@ -174,7 +187,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 3 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Rect" ]
 
 [node name="Commands" type="HBoxContainer" parent="GUI" index="0"]
@@ -217,7 +230,7 @@ text = "Build"
 flat = false
 align = 1
 items = [ "Crap Machine", null, false, false, false, 0, 0, null, "", false, "Improved crap Machine", null, false, false, false, 1, 0, null, "", false ]
-script = ExtResource( 4 )
+script = ExtResource( 6 )
 
 [node name="MessageWindow" type="ScrollContainer" parent="GUI" index="1"]
 
@@ -237,7 +250,7 @@ scroll_horizontal_enabled = false
 scroll_horizontal = 0
 scroll_vertical_enabled = true
 scroll_vertical = 0
-script = ExtResource( 5 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Scroll", "Size Flags" ]
 
 [node name="VBox" type="VBoxContainer" parent="GUI/MessageWindow" index="0"]
@@ -273,7 +286,7 @@ collision_mask = 1
 data = {
 "cells": PoolIntArray(  )
 }
-script = ExtResource( 6 )
+script = ExtResource( 8 )
 _sections_unfolded = [ "Cell", "Transform" ]
 __meta__ = {
 "_editor_clip_": 0
@@ -293,17 +306,8 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
 
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 disabled = false
 _sections_unfolded = [ "Transform" ]
-
-[node name="Navigation" type="Navigation" parent="." index="6"]
-
-up_vector = Vector3( 0, 1, 0 )
-
-[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation" index="0"]
-
-navmesh = SubResource( 4 )
-enabled = true
 
 
