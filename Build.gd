@@ -54,7 +54,7 @@ func _get_grid(object_to_place):
 	object_to_place.translation = camera._get_grid()
 		
 func _check_place_object():
-	if grid_map._is_grid_empty(object_to_place.translation, object_to_place.size1, object_to_place.size2): # true is always implied when there is no comparison
+	if grid_map._is_grid_empty(object_to_place): # true is always implied when there is no comparison, size and translation is part of obj no need to pass seperate parameters
 		_place_object_allowed()
 	else:
 		_place_object_error()
@@ -74,7 +74,8 @@ func _place_object_error():
 	#Example of message call
 	#Put message code in message node and call it all as one function
 	#(Short Text, icon to display, timeout (0s disabled), Longtext ("" = disabled), Object ID,is_undockable)
-	message_window._add_msg(str("Grid ", object_to_place.translation, " occupied!"),"godot",5,"Example long text blah blah blah",object_to_place,true) #msg with the works
+	var obj_err = grid_map._is_grid_empty(object_to_place, true) #true returns item id
+	message_window._add_msg(str("Grid ", object_to_place.translation, " occupied!"),"godot",5,"Example long text blah blah blah",obj_err,true) #msg with the works
 	message_window._add_msg(str("Grid ", object_to_place.translation, " occupied!")) #basic message with default values
 	
 #	remove_child(object_to_place)	#Place it elswhere

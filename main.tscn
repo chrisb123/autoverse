@@ -94,7 +94,7 @@ filter/ledge_spans = false
 filter/filter_walkable_low_height_spans = false
 _sections_unfolded = [ "agent", "cell", "detail", "edge", "filter", "polygon", "region", "sample_partition_type" ]
 
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 script = ExtResource( 1 )
 
@@ -257,7 +257,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
-_sections_unfolded = [ "Grow Direction", "Size Flags" ]
+_sections_unfolded = [ "Grow Direction", "Size Flags", "Theme" ]
 
 [node name="GridMap" type="GridMap" parent="." index="4"]
 
