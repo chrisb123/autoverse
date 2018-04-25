@@ -7,6 +7,7 @@ var position
 var put = []
 var get = []
 onready var grid_map = get_node("/root/Main/GridMap")
+var enabled = false
 
 func _start():
 	position = get_parent().translation
