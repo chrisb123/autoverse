@@ -1,6 +1,5 @@
 extends MeshInstance
 
-var map = {}
 var asID = 0
 var as = AStar.new()
 onready var camera = get_node("/root/Main/Camera")
@@ -8,12 +7,12 @@ onready var character = get_node("/root/Main/Character")
 var begin = 0
 var end = 0
 var path = []
-var SPEED = 10
+
+var SPEED = 5
 
 func _ready():
 	for x in range(-5,6):
 		for y in range(-5,6):
-			map[Vector3(x,0,y)] = asID
 			as.add_point(asID, Vector3(x,0,y))
 			asID += 1 #generate point list
 	for i in as.get_available_point_id():
@@ -23,6 +22,7 @@ func _ready():
 				var posb = posa + Vector3(x,0,y)
 				var j = as.get_closest_point(posb)
 				as.connect_points(i,j,true) #generate connections
+	end = as.get_closest_point(Vector3(0,0,0))
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -36,9 +36,15 @@ func _input(event):
 				_update_path()
 
 func _update_path():
+	var curve = Curve3D.new()
 	var p = as.get_point_path(begin, end)
 	path = Array(p) # Vector3array too complex to use, convert to regular array
+	for i in path:
+		curve.add_point(i)
+	var j = curve.get_baked_points()
+	path = Array(j)
 	path.invert()
+	print(path)
 	set_process(true)
 
 func _remove_point(pos):
