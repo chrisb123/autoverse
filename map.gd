@@ -7,7 +7,6 @@ onready var character = get_node("/root/Main/Character")
 var begin = 0
 var end = 0
 var path = []
-
 var SPEED = 5
 
 func _ready():
@@ -28,12 +27,12 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.get_button_index() == 1 and event.is_pressed():
 			var result = camera._mouse_ray(event.position)
-			if result:
+			if result and path.size() < 2:
 				var grid_select = camera._int_position(result.position)
-				print(grid_select)
 				begin = end
 				end = as.get_closest_point(grid_select)
 				_update_path()
+				
 
 func _update_path():
 	var curve = Curve3D.new()
@@ -44,8 +43,8 @@ func _update_path():
 	var j = curve.get_baked_points()
 	path = Array(j)
 	path.invert()
-	print(path)
 	set_process(true)
+	
 
 func _remove_point(pos):
 	var id = as.get_closest_point(pos)
