@@ -1,5 +1,5 @@
 extends NavigationMeshInstance
-
+#File not needed
 var vertices = PoolVector3Array()
 var pia1 = PoolIntArray()
 var pia2 = PoolIntArray()

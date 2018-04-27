@@ -2,6 +2,7 @@ extends GridMap
 
 # grid map should probably have x,y,z and internal ID
 
+onready var map = get_node("/root/Main/Map")
 var grid_map = {}
 
 func _ready():
@@ -34,6 +35,7 @@ func _set_grid_contents(object):
 			for z in range(size1.z,size2.z):
 				var location = Vector3(object.translation.x+x,object.translation.y+y,object.translation.z+z)
 				grid_map[location] = object
+				map._remove_point(location)
 
 func _get_grid_contents(pos):
 	if grid_map.has(pos): 

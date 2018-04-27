@@ -1,11 +1,28 @@
-extends Navigation
-#File not needed
+extends MeshInstance
+
+var map = {}
+var asID = 0
+var as = AStar.new()
 onready var camera = get_node("/root/Main/Camera")
 onready var character = get_node("/root/Main/Character")
-var begin = Vector3()
-var end = Vector3()
+var begin = 0
+var end = 0
 var path = []
 var SPEED = 10
+
+func _ready():
+	for x in range(-5,6):
+		for y in range(-5,6):
+			map[Vector3(x,0,y)] = asID
+			as.add_point(asID, Vector3(x,0,y))
+			asID += 1 #generate point list
+	for i in as.get_available_point_id():
+		var posa = as.get_point_position(i)
+		for x in range(-1,2):
+			for y in range(-1,2):
+				var posb = posa + Vector3(x,0,y)
+				var j = as.get_closest_point(posb)
+				as.connect_points(i,j,true) #generate connections
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -13,17 +30,23 @@ func _input(event):
 			var result = camera._mouse_ray(event.position)
 			if result:
 				var grid_select = camera._int_position(result.position)
-#				print(get_closest_point(grid_select)) #should print closest point, but doesnt
-	
-#				print(get_simple_path(start,grid_select))
+				print(grid_select)
 				begin = end
-				end = grid_select
+				end = as.get_closest_point(grid_select)
 				_update_path()
-	
-#	var path = get_simple_path(Vector3(-1,0,-1),Vector3(1,0,1))
-#	for a in path:
-#		print(a)
 
+func _update_path():
+	var p = as.get_point_path(begin, end)
+	path = Array(p) # Vector3array too complex to use, convert to regular array
+	path.invert()
+	set_process(true)
+
+func _remove_point(pos):
+	var id = as.get_closest_point(pos)
+	var con = as.get_point_connections(id)
+	for i in con:
+		as.disconnect_points(id,i) #remove connections
+	as.remove_point(id) #remove point
 
 func _process(delta): #This has been copied from another demo program, it also should belong in the character node
 	if (path.size() > 1): #its probably good enough to use, change it as needed
@@ -55,10 +78,3 @@ func _process(delta): #This has been copied from another demo program, it also s
 			set_process(false)
 	else:
 		set_process(false)
-
-
-func _update_path():
-	var p = get_simple_path(begin, end, true)
-	path = Array(p) # Vector3array too complex to use, convert to regular array
-	path.invert()
-	set_process(true)
