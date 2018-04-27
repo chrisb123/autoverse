@@ -18,7 +18,7 @@ func _ready():
 			asID += 1 #generate point list
 	for i in as.get_available_point_id():
 		var posa = as.get_point_position(i)
-		for x in range(-1,2):
+		for x in range(0,2):
 			for y in range(-1,2):
 				var posb = posa + Vector3(x,0,y)
 				var j = as.get_closest_point(posb)
@@ -43,10 +43,11 @@ func _update_path():
 
 func _remove_point(pos):
 	var id = as.get_closest_point(pos)
-	var con = as.get_point_connections(id)
-	for i in con:
-		as.disconnect_points(id,i) #remove connections
-	as.remove_point(id) #remove point
+	if as.get_point_position(id).distance_to(pos) < 1:
+		var con = as.get_point_connections(id)
+		for i in con:
+			as.disconnect_points(id,i) #remove connections
+		as.remove_point(id) #remove point
 
 func _process(delta): #This has been copied from another demo program, it also should belong in the character node
 	if (path.size() > 1): #its probably good enough to use, change it as needed
