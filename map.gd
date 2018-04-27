@@ -3,25 +3,39 @@ extends MeshInstance
 var asID = 0
 var as = AStar.new()
 onready var camera = get_node("/root/Main/Camera")
-onready var character = get_node("/root/Main/Character")
 var begin = 0
 var end = 0
 var path = []
 var SPEED = 5
 
 func _ready():
-	for x in range(-5,6):
-		for y in range(-5,6):
-			as.add_point(asID, Vector3(x,0,y))
+	pass
+	var a = Thread.new()
+	a.start(self,"_gen_map",Vector3(0,0,0))
+	a.wait_to_finish()
+
+	
+func _gen_map(pos):
+	print("Starting map gen:",pos)
+	for x in range(-10,11):
+		for y in range(-10,11):
+			var point = pos + Vector3(x,0,y)
+			as.add_point(asID, point)
 			asID += 1 #generate point list
-	for i in as.get_available_point_id():
-		var posa = as.get_point_position(i)
-		for x in range(0,2):
-			for y in range(-1,2):
-				var posb = posa + Vector3(x,0,y)
-				var j = as.get_closest_point(posb)
-				as.connect_points(i,j,true) #generate connections
+	for x in range(-10,11):
+		for y in range(-10,11):
+			var point = pos + Vector3(x,0,y)
+			var i = as.get_closest_point(point)
+			var posa = as.get_point_position(i)
+			for x in range(-1,2):
+				for y in range(-1,2):
+					var posb = posa + Vector3(x,0,y)
+					var j = as.get_closest_point(posb)
+					if i != j and not as.are_points_connected(i,j):
+						as.connect_points(i,j,true) #generate connections
+					
 	end = as.get_closest_point(Vector3(0,0,0))
+	print("Map gen ended")
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -31,6 +45,9 @@ func _input(event):
 				var grid_select = camera._int_position(result.position)
 				begin = end
 				end = as.get_closest_point(grid_select)
+				if grid_select != as.get_point_position(end):
+					_gen_map(grid_select)
+					end = as.get_closest_point(grid_select)
 				_update_path()
 				
 
