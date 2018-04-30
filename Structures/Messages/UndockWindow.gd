@@ -9,11 +9,21 @@ var obj
 
 onready var camera = get_node("HBoxContainer/ViewportContainer/Viewport/TextureRect/Camera")
 onready var labels = get_node("HBoxContainer/VBoxContainer")
+onready var grid_map = get_node("/root/Main/GridMap")
 
 func _process(delta):
-	labels.get_node("Label5").text = str("Input Queue: ",obj.get_node("Obj").input_q)
-	labels.get_node("Label6").text = str("Output Queue: ",obj.get_node("Obj").output_q)
-
+	#changes here are for testing, should probably seperate object windows and actor windows. they're different enough
+	#to warrant seperate scripts. should handle like Objects, same base script, and then specific script on top.
+	#Perhaps cutout the VBoxContainer to seperete scenes and add as children ? (everything above is standard between them)
+	#poor implementation of camera following. at the moment just testing
+	if obj.is_in_group("Actor"):
+		var grid_location = grid_map._get_actor_grid(obj)
+		labels.get_node("Label3").text = str("Grid Loc: ",grid_location)
+		camera.look_at_from_position(obj.translation + Vector3(0,3,3), obj.translation, Vector3(0,1,0))
+	else:
+		labels.get_node("Label5").text = str("Input Queue: ",obj.get_node("Obj").input_q)
+		labels.get_node("Label6").text = str("Output Queue: ",obj.get_node("Obj").output_q)
+		
 func _ready():
 	set_process(false)
 	self.popup()

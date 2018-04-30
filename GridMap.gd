@@ -60,6 +60,9 @@ func _set_grid_actor(actor,grid_location):
 				grid_map[location] = actor
 	print(grid_map)
 
+func _get_actor_grid(actor):
+		var temp = grid_map.values().find(actor)
+		return grid_map.keys()[temp]
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

@@ -9,6 +9,7 @@ var grid_translation_y = 0
 var grid_translation_z = 0
 export var size1 = Vector3()
 export var size2 = Vector3()
+var flashing
 
 onready var grid_map = get_node("/root/Main/GridMap")
 
@@ -30,5 +31,17 @@ func _process(delta):	#probably not the cleanest way of doing it. but works. Cha
 		grid_translation_z = round(translation.z)
 		if grid_map._get_grid_contents(Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) == null:
 			grid_map._set_grid_actor(self,Vector3(grid_translation_x,grid_translation_y,grid_translation_z))
+			
+func _obj_flash_start():
+	flashing = true
+	while flashing:
+		visible = false
+		yield(get_tree().create_timer(.25),"timeout")
+		visible = true
+		yield(get_tree().create_timer(.25),"timeout")
+
+func _obj_flash_stop():
+	visible = true
+	flashing = false			
 #		yield(get_tree(), "idle_frame")
 	#print(old_translation_x," ",old_translation_y, " ",old_translation_z)
