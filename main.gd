@@ -7,16 +7,18 @@ var character = load("res://character.tscn")
 func _ready():
 	camera.connect("grid_selected",self,"_grid_selected")
 	var tmp = character.instance()
-	add_child(tmp)
+	grid_map.add_child(tmp)
 	_tick_loop()
 
 func _tick_loop():
 	while true:
 		for i in grid_map.get_children():
-			i.get_node("Obj")._tick1()
+			if ! i.is_in_group("Actor"):
+				i.get_node("Obj")._tick1()
 		yield(get_tree().create_timer(.5),"timeout")
 		for i in grid_map.get_children():
-			i.get_node("Obj")._tick2()
+			if ! i.is_in_group("Actor"):
+				i.get_node("Obj")._tick2()
 		yield(get_tree().create_timer(.5),"timeout")
 
 func _grid_selected():

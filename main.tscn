@@ -68,7 +68,7 @@ size = Vector2( 500000, 500000 )
 subdivide_width = 4
 subdivide_depth = 4
 
-[sub_resource type="SphereMesh" id=5]
+[sub_resource type="SphereMesh" id=3]
 
 radius = 0.5
 height = 0.5
@@ -159,7 +159,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 5 )
+mesh = SubResource( 3 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
@@ -176,7 +176,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 5 )
+mesh = SubResource( 3 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
@@ -193,7 +193,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 5 )
+mesh = SubResource( 3 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
@@ -210,7 +210,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 5 )
+mesh = SubResource( 3 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]

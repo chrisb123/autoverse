@@ -40,6 +40,27 @@ func _set_grid_contents(object):
 func _get_grid_contents(pos):
 	if grid_map.has(pos): 
 		return grid_map[pos]
+		
+func _set_grid_actor(actor,grid_location):
+	
+	#Delete any Grid_Map locations of actor. eg. previous location of Actor.
+	while grid_map.values().has(actor):
+		var temp = grid_map.values().find(actor)
+		var temp2 = grid_map.keys()[temp]
+		grid_map.erase(temp2)
+
+	#Add new position of Actor. 
+	var size1 = actor.size1
+	var size2 = actor.size2
+	size2 = size2 + size1
+	for x in range(size1.x,size2.x):
+		for y in range(size1.y,size2.y):
+			for z in range(size1.z,size2.z):
+				var location = Vector3(grid_location.x+x,grid_location.y+y,grid_location.z+z)
+				grid_map[location] = actor
+	print(grid_map)
+
+
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.

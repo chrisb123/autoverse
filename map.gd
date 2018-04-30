@@ -94,7 +94,7 @@ func _process(delta): #This has been copied from another demo program, it also s
 		var t = Transform()
 		t.origin = atpos
 		t=t.looking_at(atpos - atdir, Vector3(0, 1, 0))
-		get_node("/root/Main/Character").set_transform(t)
+		get_node("/root/Main/GridMap/Character").set_transform(t)
 		
 		if (path.size() < 2):
 			path = []
