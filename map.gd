@@ -1,4 +1,4 @@
-extends MeshInstance
+extends GridMap
 
 var asID = 0
 var as = AStar.new()
