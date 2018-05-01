@@ -13,9 +13,11 @@ onready var gui = get_node("/root/Main/GUI")
 var UndockWindow = load("res://Structures/Messages/UndockWindow.tscn")
 var obj_old
 var mouse_pos
+var mouse_active = true
 
 func _ready():
-	pass
+	gui.connect("mouse_outside_gui", self, "_set_mouse_disabled")
+	gui.connect("mouse_inside_gui", self, "_set_mouse_activated")
 
 func _process(delta):
 	var pos = Vector3()
@@ -61,7 +63,7 @@ func _int_position(input):
 	return out
 
 func _input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and mouse_active:
 		if event.get_button_index() == 2 and event.is_pressed():
 			RMB = true
 			mouse_pos = event.position
@@ -80,7 +82,7 @@ func _input(event):
 					var window_to_add = UndockWindow.instance()
 					gui.add_child(window_to_add)
 					window_to_add._initialize(obj, "Shift click window")
-	elif event is InputEventMouseMotion and RMB:
+	elif event is InputEventMouseMotion and RMB and mouse_active:
 		var rot = event.get_relative()
 		var camrot = get_rotation_degrees()
 		camrot.y -= rot.x / CAMSPEED
@@ -90,7 +92,7 @@ func _input(event):
 		elif camrot.x < -85:
 			camrot.x = -85
 		set_rotation_degrees(camrot)
-	elif event is InputEventMouseMotion and Input.is_action_pressed("ui_select") and not placement:
+	elif event is InputEventMouseMotion and Input.is_action_pressed("ui_select") and not placement and mouse_active:
 		var result = _mouse_ray(event.position)
 		if result:
 			var pos = _int_position(result.position)
@@ -112,3 +114,9 @@ func _input(event):
 	if Input.is_action_just_released("ui_select") and obj_old:
 		obj_old._obj_flash_stop()
 		obj_old = null
+		
+func _set_mouse_disabled():
+	mouse_active = false
+	
+func _set_mouse_activated():
+	mouse_active = true

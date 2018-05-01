@@ -3,13 +3,16 @@ extends GridMap
 var asID = 0
 var as = AStar.new()
 onready var camera = get_node("/root/Main/Camera")
+onready var gui = get_node("/root/Main/GUI")
 var begin = 0
 var end = 0
 var path = []
 var SPEED = 5
+var mouse_active = true
 
 func _ready():
-	pass
+	gui.connect("mouse_outside_gui", self, "_set_mouse_disabled")
+	gui.connect("mouse_inside_gui", self, "_set_mouse_activated")	
 	var a = Thread.new()
 	a.start(self,"_gen_map",Vector3(0,0,0))
 	a.wait_to_finish()
@@ -38,7 +41,7 @@ func _gen_map(pos):
 	print("Map gen ended")
 
 func _input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and mouse_active:
 		if event.get_button_index() == 1 and event.is_pressed():
 			var result = camera._mouse_ray(event.position)
 			if result and path.size() < 2:
@@ -101,3 +104,10 @@ func _process(delta): #This has been copied from another demo program, it also s
 			set_process(false)
 	else:
 		set_process(false)
+
+
+func _set_mouse_disabled():
+	mouse_active = false
+	
+func _set_mouse_activated():
+	mouse_active = true

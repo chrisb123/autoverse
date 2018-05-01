@@ -221,4 +221,8 @@ __meta__ = {
 "_editor_clip_": 0
 }
 
+[connection signal="mouse_entered" from="GUI" to="GUI" method="_on_GUI_mouse_entered"]
+
+[connection signal="mouse_exited" from="GUI" to="GUI" method="_on_GUI_mouse_exited"]
+
 
