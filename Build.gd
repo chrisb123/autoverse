@@ -6,6 +6,7 @@ var object_to_place
 var object_id
 onready var camera = get_node("/root/Main/Camera")
 onready var grid_map = get_node("/root/Main/GridMap")
+onready var gui = get_node("/root/Main/GUI")
 onready var message_window = get_node("/root/Main/GUI/MessageWindow")
 var factory1 = load("res://Structures/factory1.tscn")
 var factory2 = load("res://Structures/factory2.tscn")
@@ -94,7 +95,7 @@ func _reset_build(): #todo
 #MOUSE CONTROLS
 
 func _input(event):
-	if event is InputEventMouseButton and placing_item and event.is_pressed(): #use and dont nest inside another if statement
+	if event is InputEventMouseButton and placing_item and event.is_pressed() and gui.mouse_in_main_gui: #use and dont nest inside another if statement
 		if event.get_button_index() == 1:
 			_check_place_object()
 		elif event.get_button_index() == 2:

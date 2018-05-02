@@ -11,8 +11,6 @@ var SPEED = 20
 var mouse_active = true
 
 func _ready():
-	gui.connect("mouse_outside_gui", self, "_set_mouse_disabled")
-	gui.connect("mouse_inside_gui", self, "_set_mouse_activated")	
 	var a = Thread.new()
 	a.start(self,"_gen_map",Vector3(0,0,0))
 	a.wait_to_finish()
@@ -43,7 +41,7 @@ func _gen_map(pos,size=15): #How long does a grid this size take to create for y
 #	print("Map gen ended")
 
 func _input(event): #This piece of code is for testing
-	if event is InputEventMouseButton and camera.mouse_active: #its alrteady handled in camera just reference the value
+	if event is InputEventMouseButton and gui.mouse_in_main_gui: #its alrteady handled in camera just reference the value
 		if event.get_button_index() == 1 and event.is_pressed():
 			var result = camera._mouse_ray(event.position)
 			if result and path.size() < 2:
@@ -111,10 +109,3 @@ func _process(delta): #This has been copied from another demo program, it also s
 			set_process(false)
 	else:
 		set_process(false)
-
-
-func _set_mouse_disabled():
-	mouse_active = false
-	
-func _set_mouse_activated():
-	mouse_active = true
