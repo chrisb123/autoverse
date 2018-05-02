@@ -10,7 +10,7 @@ signal grid_selected
 var placement
 onready var grid_map = get_node("/root/Main/GridMap")
 onready var gui = get_node("/root/Main/GUI")
-var UndockWindow = load("res://Structures/Messages/UndockWindow.tscn")
+var UndockWindow = load("res://Structures/Messages/UndockWindow/UndockWindow.tscn")
 var obj_old
 var mouse_pos
 var mouse_active = true

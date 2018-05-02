@@ -6,7 +6,7 @@ extends Button
 
 var text_local
 var object_id_local
-var UndockWindow = load("res://Structures/Messages/UndockWindow.tscn")
+var UndockWindow = load("res://Structures/Messages/UndockWindow/UndockWindow.tscn")
 onready var gui = get_tree().get_root().get_node("/root/Main/GUI/")
 
 
