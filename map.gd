@@ -43,7 +43,7 @@ func _gen_map(pos,size=15): #How long does a grid this size take to create for y
 	print("Map gen ended")
 
 func _input(event): #This piece of code is for testing
-	if event is InputEventMouseButton and camera.mouse_active and not camera.placement: #its alrteady handled in camera just reference the value
+	if event is InputEventMouseButton and camera.mouse_active: #its alrteady handled in camera just reference the value
 		if event.get_button_index() == 1 and event.is_pressed():
 			var result = camera._mouse_ray(event.position)
 			if result and path.size() < 2:
@@ -53,7 +53,10 @@ func _input(event): #This piece of code is for testing
 				if grid_select != as.get_point_position(end):
 					_gen_map(grid_select)
 					end = as.get_closest_point(grid_select)
-				_update_path()
+				if not camera.placement:
+					_update_path()
+				else:
+					end = begin
 				
 
 func _update_path():
@@ -65,6 +68,8 @@ func _update_path():
 	var j = curve.get_baked_points()
 	path = Array(j)
 	path.invert()
+	if not path.size():
+		end = begin
 	set_process(true)
 	
 
