@@ -24,6 +24,7 @@ func _gen_map(pos):
 		for y in range(-10,11):
 			var point = pos + Vector3(x,0,y)
 			as.add_point(asID, point)
+			set_cell_item(point.x,point.y,point.z,0)
 			asID += 1 #generate point list
 	for x in range(-10,11):
 		for y in range(-10,11):
