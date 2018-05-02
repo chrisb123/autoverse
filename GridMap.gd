@@ -2,7 +2,7 @@ extends GridMap
 
 # grid map should probably have x,y,z and internal ID
 
-onready var map = get_node("/root/Main/Map")
+onready var map = get_node("/root/Main/TerrMap")
 var grid_map = {}
 
 func _ready():
