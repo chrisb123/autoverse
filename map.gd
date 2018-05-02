@@ -19,7 +19,7 @@ func _ready():
 
 	
 func _gen_map(pos,size=15): #How long does a grid this size take to create for you?
-	print("Starting map gen:",pos)
+#	print("Starting map gen:",pos)
 	for x in range(-size,size+1): 
 		for y in range(-size,size+1):
 			var point = pos + Vector3(x,0,y)
@@ -40,7 +40,7 @@ func _gen_map(pos,size=15): #How long does a grid this size take to create for y
 						as.connect_points(i,j,true) #generate connections
 					
 	end = as.get_closest_point(Vector3(0,0,0))
-	print("Map gen ended")
+#	print("Map gen ended")
 
 func _input(event): #This piece of code is for testing
 	if event is InputEventMouseButton and camera.mouse_active: #its alrteady handled in camera just reference the value

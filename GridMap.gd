@@ -58,7 +58,7 @@ func _set_grid_actor(actor,grid_location):
 			for z in range(size1.z,size2.z):
 				var location = Vector3(grid_location.x+x,grid_location.y+y,grid_location.z+z)
 				grid_map[location] = actor
-	print(grid_map)
+#	print(grid_map)
 
 func _get_actor_grid(actor):
 		var temp = grid_map.values().find(actor)
