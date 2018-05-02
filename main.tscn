@@ -69,8 +69,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 1170.0
-margin_bottom = 710.0
+margin_right = 442.0
+margin_bottom = 276.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -221,5 +221,9 @@ __meta__ = {
 "_editor_clip_": 0,
 "_editor_floor_": Vector3( 0, 0, 0 )
 }
+
+[connection signal="mouse_entered" from="GUI" to="GUI" method="_on_GUI_mouse_entered"]
+
+[connection signal="mouse_exited" from="GUI" to="GUI" method="_on_GUI_mouse_exited"]
 
 

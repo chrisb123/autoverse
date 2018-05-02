@@ -7,7 +7,7 @@ onready var gui = get_node("/root/Main/GUI")
 var begin = 0
 var end = 0
 var path = []
-var SPEED = 5
+var SPEED = 20
 var mouse_active = true
 
 func _ready():
@@ -42,8 +42,8 @@ func _gen_map(pos,size=15): #How long does a grid this size take to create for y
 	end = as.get_closest_point(Vector3(0,0,0))
 	print("Map gen ended")
 
-func _input(event):
-	if event is InputEventMouseButton and mouse_active:
+func _input(event): #This piece of code is for testing
+	if event is InputEventMouseButton and camera.mouse_active and not camera.placement: #its alrteady handled in camera just reference the value
 		if event.get_button_index() == 1 and event.is_pressed():
 			var result = camera._mouse_ray(event.position)
 			if result and path.size() < 2:

@@ -23,15 +23,15 @@ func _process(delta):
 	var pos = Vector3()
 	if Input.is_action_pressed("ui_right"):
 		pos.x += delta * CAMSPEED
-	elif Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("ui_left"):
 		pos.x -= delta * CAMSPEED
-	elif Input.is_action_pressed("ui_fwd"):
+	if Input.is_action_pressed("ui_fwd"):
 		pos.z -= delta * CAMSPEED
-	elif Input.is_action_pressed("ui_back"):
+	if Input.is_action_pressed("ui_back"):
 		pos.z += delta * CAMSPEED
-	elif Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("ui_up"):
 		pos.y += delta * CAMSPEED
-	elif Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("ui_down"):
 		pos.y -= delta * CAMSPEED
 	translate_object_local(pos)
 	pos = get_translation()

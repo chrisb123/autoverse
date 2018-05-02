@@ -19,13 +19,14 @@ func _ready():
 	
 
 
-func _on_GUI_mouse_entered():
+func _on_GUI_mouse_entered(): #why didnt you just send this signal direct to camera?
 	print("entered gui")
 	emit_signal("mouse_inside_gui")
-	pass # replace with function body
 
 
-func _on_GUI_mouse_exited():
-	emit_signal("mouse_outside_gui")
+
+func _on_GUI_mouse_exited(): #why didnt you just send this signal direct to camera?
 	print("exited gui")
-	pass # replace with function body
+	emit_signal("mouse_outside_gui")
+	
+
