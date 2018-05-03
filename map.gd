@@ -7,8 +7,11 @@ onready var gui = get_node("/root/Main/GUI")
 var begin = 0
 var end = 0
 var path = []
-var SPEED = 20
-var mouse_active = true
+var SPEED = 5
+
+var _state = null
+enum STATES { IDLE, FOLLOW }
+var target_point_world = Vector2()
 
 func _ready():
 	var a = Thread.new()
@@ -41,7 +44,7 @@ func _gen_map(pos,size=15): #How long does a grid this size take to create for y
 #	print("Map gen ended")
 
 func _input(event): #This piece of code is for testing
-	if event is InputEventMouseButton and gui.mouse_in_main_gui: #its alrteady handled in camera just reference the value
+	if event is InputEventMouseButton and gui.mouse_in_main_gui and not Input.is_action_pressed("ui_select"): #its alrteady handled in camera just reference the value
 		if event.get_button_index() == 1 and event.is_pressed():
 			var result = camera._mouse_ray(event.position)
 			if result and path.size() < 2:
@@ -68,7 +71,8 @@ func _update_path():
 	path.invert()
 	if not path.size():
 		end = begin
-	set_process(true)
+	else:
+		set_process(true)
 	
 
 func _remove_point(pos):
@@ -94,16 +98,18 @@ func _process(delta): #This has been copied from another demo program, it also s
 			else:
 				path[path.size() - 1] = pfrom.linear_interpolate(pto, to_walk/d)
 				to_walk = 0
-		
+				
+				
 		var atpos = path[path.size() - 1]
 		var atdir = to_watch
 		atdir.y = 0
-		
+#		print(atpos.distance_to(path[path.size() - 2]))
+
 		var t = Transform()
 		t.origin = atpos
 		t=t.looking_at(atpos - atdir, Vector3(0, 1, 0))
 		get_node("/root/Main/GridMap/Character").set_transform(t)
-		
+
 		if (path.size() < 2):
 			path = []
 			set_process(false)

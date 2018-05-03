@@ -71,7 +71,7 @@ func _input(event):
 			RMB = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			Input.warp_mouse_position(mouse_pos)
-		elif event.get_button_index() == 1 and event.is_pressed() and Input.is_action_pressed("ui_select"):
+		elif event.get_button_index() == 1 and event.is_pressed() and Input.is_action_pressed("ui_select"): #shift click
 			var result = _mouse_ray(event.position)
 			if result:
 				grid_select = _int_position(result.position)
