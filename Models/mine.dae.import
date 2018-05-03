@@ -7,7 +7,7 @@ path="res://.import/mine.dae-f2af3905322df3d29335512161dc818f.scn"
 [deps]
 
 source_file="res://Models/mine.dae"
-source_md5="a4317229b35ae3c1dbc84182988f6f2a"
+source_md5="0fd4b99604f8c8215f4905fc3da3128e"
 
 dest_files=[ "res://.import/mine.dae-f2af3905322df3d29335512161dc818f.scn" ]
 dest_md5="255c88032c0262ba2f0cfef76084ef83"
