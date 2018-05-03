@@ -6,6 +6,7 @@
 
 [node name="Base" type="Spatial" groups=[
 "split",
+"Object",
 ]]
 
 script = ExtResource( 1 )

@@ -13,7 +13,7 @@
 
 plane = Plane( 0, 1, 0, 0 )
 
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 script = ExtResource( 1 )
 
