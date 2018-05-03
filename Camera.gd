@@ -8,7 +8,7 @@ var grid = Vector3()
 var grid_select = Vector3()
 signal grid_selected
 var placement
-onready var grid_map = get_node("/root/Main/GridMap")
+onready var obj_map = get_node("/root/Main/ObjMap")
 onready var gui = get_node("/root/Main/GUI")
 var UndockWindow = load("res://Structures/Messages/UndockWindow/UndockWindow.tscn")
 var obj_old
@@ -34,8 +34,8 @@ func _process(delta):
 		pos.y -= delta * CAMSPEED
 	translate_object_local(pos)
 	pos = get_translation()
-	if pos.y < 0.1:
-		pos.y = 0.1
+	if pos.y < 1:
+		pos.y = 1
 	set_translation(pos)
 
 func _get_grid_select():
@@ -76,7 +76,7 @@ func _input(event):
 			if result:
 				grid_select = _int_position(result.position)
 				emit_signal("grid_selected")
-				var obj = grid_map._get_grid_contents(grid_select)
+				var obj = obj_map._get_grid_contents(grid_select)
 				if obj:
 					var window_to_add = UndockWindow.instance()
 					gui.add_child(window_to_add)
@@ -95,7 +95,7 @@ func _input(event):
 		var result = _mouse_ray(event.position)
 		if result:
 			var pos = _int_position(result.position)
-			var obj = grid_map._get_grid_contents(pos)
+			var obj = obj_map._get_grid_contents(pos)
 			if obj_old != obj:
 				if obj_old:
 					obj_old._obj_flash_stop()

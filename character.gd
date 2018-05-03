@@ -10,27 +10,66 @@ var grid_translation_z = 0
 export var size1 = Vector3()
 export var size2 = Vector3()
 var flashing
+var begin = 0
+var end = 0
+var path = []
+var pp
+var SPEED = 5
+var m = SpatialMaterial.new()
 
-onready var grid_map = get_node("/root/Main/GridMap")
+onready var obj_map = get_node("/root/Main/ObjMap")
+onready var terr_map = get_node("/root/Main/TerrMap")
+onready var camera = get_node("/root/Main/Camera")
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
+	end = terr_map.as.get_closest_point(Vector3(0,0,0))
 
-func _process(delta):	#probably not the cleanest way of doing it. but works. Character now exists on Grid_Map like objects.
+
+func _process(delta):	#probably not the cleanest way of doing it. but works. Character now exists on obj_map like objects.
 	if round(translation.x) != (grid_translation_x): 
-		grid_translation_x = round(translation.x)
-		if grid_map._get_grid_contents(Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) == null:
-			grid_map._set_grid_actor(self,Vector3(grid_translation_x,grid_translation_y,grid_translation_z))
-	elif round(translation.y) != (grid_translation_y):
-		grid_translation_y = round(translation.y)
-		if grid_map._get_grid_contents(Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) == null:
-			grid_map._set_grid_actor(self,Vector3(grid_translation_x,grid_translation_y,grid_translation_z))
-	elif round(translation.z) != (grid_translation_z):
-		grid_translation_z = round(translation.z)
-		if grid_map._get_grid_contents(Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) == null:
-			grid_map._set_grid_actor(self,Vector3(grid_translation_x,grid_translation_y,grid_translation_z))
+#		grid_translation_x = round(translation.x)
+#		if obj_map._get_grid_contents(Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) == null: #The navigation system should handle this
+		obj_map._set_grid_actor(self,Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) #How does this suppose to function?
+	if round(translation.y) != (grid_translation_y):
+#		grid_translation_y = round(translation.y)
+#		if obj_map._get_grid_contents(Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) == null:
+		obj_map._set_grid_actor(self,Vector3(grid_translation_x,grid_translation_y,grid_translation_z))
+	if round(translation.z) != (grid_translation_z):
+#		grid_translation_z = round(translation.z)
+#		if obj_map._get_grid_contents(Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) == null:
+		obj_map._set_grid_actor(self,Vector3(grid_translation_x,grid_translation_y,grid_translation_z))
+		
+	if (path.size() > 1): #Can be used to move character
+		var to_walk = delta*SPEED
+		var to_watch = Vector3(0, 1, 0)
+		while(to_walk > 0 and path.size() >= 2):
+			var pfrom = path[path.size() - 1]
+			var pto = path[path.size() - 2]
+			to_watch = (pto - pfrom).normalized()
+			var d = pfrom.distance_to(pto)
+			if (d <= to_walk):
+				path.remove(path.size() - 1)
+				to_walk -= d
+			else:
+				path[path.size() - 1] = pfrom.linear_interpolate(pto, to_walk/d)
+				to_walk = 0
+				
+				
+		var atpos = path[path.size() - 1]
+		var atdir = to_watch
+		atdir.y = 0
+#		print(atpos.distance_to(path[path.size() - 2]))
+
+		var t = Transform()
+		t.origin = atpos
+		t=t.looking_at(atpos - atdir, Vector3(0, 1, 0))
+		.set_transform(t)
+
+		if (path.size() < 2):
+			path = []
+			set_process(false)
+	else:
+		set_process(false)
 			
 func _obj_flash_start():
 	flashing = true
@@ -45,3 +84,39 @@ func _obj_flash_stop():
 	flashing = false			
 #		yield(get_tree(), "idle_frame")
 	#print(old_translation_x," ",old_translation_y, " ",old_translation_z)
+
+func _click(result):
+	if result and path.size() < 2:
+		var grid_select = camera._int_position(result.position)
+		begin = end
+		end = terr_map.as.get_closest_point(grid_select)
+		if grid_select != terr_map.as.get_point_position(end):
+			terr_map._gen_map(grid_select)
+			end = terr_map.as.get_closest_point(grid_select)
+		if not camera.placement:
+			_update_path()
+		else:
+				end = begin
+
+func _update_path():
+	var curve = Curve3D.new()
+	var p = terr_map.as.get_point_path(begin, end)
+	path = Array(p) # Vector3array too complex to use, convert to regular array
+	for i in path:
+		curve.add_point(i)
+	var j = curve.get_baked_points()
+	path = Array(j)
+	path.invert()
+	if not path.size():
+		end = begin
+	else:
+		set_process(true)
+		var yoffset = Vector3(0,1,0)
+		var im = get_node("../Draw") #Draw a line for visual reference, not needed in game
+		m.set_albedo(Color(1,1,1))
+		im.set_material_override(m)
+		im.clear()
+		im.begin(Mesh.PRIMITIVE_LINE_STRIP, null)
+		for x in path:
+			im.add_vertex(x+yoffset)
+		im.end()

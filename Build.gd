@@ -5,7 +5,7 @@ var placing_item
 var object_to_place
 var object_id
 onready var camera = get_node("/root/Main/Camera")
-onready var grid_map = get_node("/root/Main/GridMap")
+onready var obj_map = get_node("/root/Main/ObjMap")
 onready var gui = get_node("/root/Main/GUI")
 onready var message_window = get_node("/root/Main/GUI/MessageWindow")
 var factory1 = load("res://Structures/factory1.tscn")
@@ -55,7 +55,7 @@ func _get_grid(object_to_place):
 	object_to_place.translation = camera._get_grid()
 		
 func _check_place_object():
-	if grid_map._is_grid_empty(object_to_place): # true is always implied when there is no comparison, size and translation is part of obj no need to pass seperate parameters
+	if obj_map._is_grid_empty(object_to_place): # true is always implied when there is no comparison, size and translation is part of obj no need to pass seperate parameters
 		_place_object_allowed()
 	else:
 		_place_object_error()
@@ -63,9 +63,9 @@ func _check_place_object():
 func _place_object_allowed():
 	print("----- GRID EMPTY -----")	
 	remove_child(object_to_place)	
-	grid_map.add_child(object_to_place)
+	obj_map.add_child(object_to_place)
 	object_to_place._set_facing(object_to_place.rotation_degrees.y)
-	grid_map._set_grid_contents(object_to_place)
+	obj_map._set_grid_contents(object_to_place)
 	object_to_place._start() #execute base script methods
 	object_to_place.get_node("Obj")._start() #execute obj specific methods
 	_reset_build()
@@ -75,7 +75,7 @@ func _place_object_error():
 	#Example of message call
 	#Put message code in message node and call it all as one function
 	#(Short Text, icon to display, timeout (0s disabled), Longtext ("" = disabled), Object ID,is_undockable)
-	var obj_err = grid_map._is_grid_empty(object_to_place, true) #true returns item id
+	var obj_err = obj_map._is_grid_empty(object_to_place, true) #true returns item id
 	message_window._add_msg(str("Grid ", object_to_place.translation, " occupied!"),"godot",5,"Example long text blah blah blah",obj_err,true) #msg with the works
 	message_window._add_msg(str("Grid ", object_to_place.translation, " occupied!")) #basic message with default values
 	

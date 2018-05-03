@@ -162,7 +162,7 @@ size_flags_vertical = 3
 alignment = 2
 _sections_unfolded = [ "Grow Direction", "Size Flags", "Theme" ]
 
-[node name="GridMap" type="GridMap" parent="." index="3"]
+[node name="ObjMap" type="GridMap" parent="." index="3"]
 
 theme = null
 cell_size = Vector3( 2, 2, 2 )
@@ -222,8 +222,27 @@ __meta__ = {
 "_editor_floor_": Vector3( 0, 0, 0 )
 }
 
-[node name="Draw" type="ImmediateGeometry" parent="TerrMap" index="0"]
+[node name="CharMap" type="GridMap" parent="." index="6"]
 
+theme = null
+cell_size = Vector3( 2, 2, 2 )
+cell_octant_size = 8
+cell_center_x = true
+cell_center_y = true
+cell_center_z = true
+cell_scale = 1.0
+collision_layer = 1
+collision_mask = 1
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="Draw" type="ImmediateGeometry" parent="CharMap" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
 layers = 1
 material_override = null
 cast_shadow = 1
