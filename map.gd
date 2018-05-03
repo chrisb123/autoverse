@@ -9,6 +9,8 @@ var end = 0
 var path = []
 var SPEED = 5
 
+var m = SpatialMaterial.new()
+
 var _state = null
 enum STATES { IDLE, FOLLOW }
 var target_point_world = Vector2()
@@ -73,6 +75,15 @@ func _update_path():
 		end = begin
 	else:
 		set_process(true)
+		var yoffset = Vector3(0,1,0)
+		var im = get_node("Draw") #Draw a line for visual reference, not needed in game
+		m.set_albedo(Color(1,1,1))
+		im.set_material_override(m)
+		im.clear()
+		im.begin(Mesh.PRIMITIVE_LINE_STRIP, null)
+		for x in path:
+			im.add_vertex(x+yoffset)
+		im.end()
 	
 
 func _remove_point(pos):
