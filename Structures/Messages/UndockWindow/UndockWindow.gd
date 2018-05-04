@@ -8,8 +8,9 @@ extends WindowDialog
 var obj
 
 onready var camera = get_node("HBoxContainer/ViewportContainer/Viewport/TextureRect/Camera")
-onready var labels = get_node("HBoxContainer/VBoxContainer")
-
+onready var obj_map = get_node("/root/Main/ObjMap")
+var object_specific = load("res://Structures/Messages/UndockWindow/Object_Specific.tscn")
+var actor_specific = load("res://Structures/Messages/UndockWindow/Actor_Specific.tscn")
 
 func _process(delta):
 	#changes here are for testing, should probably seperate object windows and actor windows. they're different enough
@@ -18,11 +19,12 @@ func _process(delta):
 	#poor implementation of camera following. at the moment just testing
 	if obj.is_in_group("Actor"):
 		var grid_location = obj.translation
-		labels.get_node("Label3").text = str("Grid Loc: ",grid_location)
+#		labels.get_node("Label3").text = str("Grid Loc: ",grid_location)
 		camera.look_at_from_position(obj.translation + Vector3(0,3,3), obj.translation, Vector3(0,1,0))
 	else:
-		labels.get_node("Label5").text = str("Input Queue: ",obj.get_node("Obj").input_q)
-		labels.get_node("Label6").text = str("Output Queue: ",obj.get_node("Obj").output_q)
+		pass
+		#labels.get_node("Label5").text = str("Input Queue: ",obj.get_node("Obj").input_q)
+		#labels.get_node("Label6").text = str("Output Queue: ",obj.get_node("Obj").output_q)
 		
 func _ready():
 	set_process(false)
@@ -31,21 +33,31 @@ func _ready():
 
 func _initialize(object_id,text):
 	obj = object_id
+	if obj.is_in_group("Object"):
+		var specific_to_add = object_specific.instance()
+		$HBoxContainer.add_child(specific_to_add)
+		specific_to_add._set_labels(object_id,text)
+		window_title = "Object Specific"
+	elif obj.is_in_group("Actor"):
+		var specific_to_add = actor_specific.instance()
+		$HBoxContainer.add_child(specific_to_add)
+		specific_to_add._set_labels(object_id,text)
+		window_title = "Actor Specific"
 	_set_camera(object_id)
-	_set_labels(object_id,text)
+	#_set_labels(object_id,text)
 	
 	
 	
 func _set_camera(object_id):
 	camera.look_at_from_position(object_id.translation + Vector3(0,3,3), object_id.translation, Vector3(0,1,0))
 
-func _set_labels(object_id,text):
+#func _set_labels(object_id,text):
 	#only examples
-	labels.get_node("Label").text = str("Text: ",text)
-	labels.get_node("Label2").text = str("Name: ",object_id)
-	labels.get_node("Label3").text = str("Grid Loc: ",object_id.translation)
-	labels.get_node("Label4").text = str("Group Name: ",object_id.get_groups())
-	set_process(true)
+	#labels.get_node("Label").text = str("Text: ",text)
+	#labels.get_node("Label2").text = str("Name: ",object_id)
+	#labels.get_node("Label3").text = str("Grid Loc: ",object_id.translation)
+	#labels.get_node("Label4").text = str("Group Name: ",object_id.get_groups())
+	#set_process(true)
 
 	
 	

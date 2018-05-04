@@ -65,6 +65,21 @@ func _get_grid_contents(pos):
 #func _get_actor_grid(actor):
 #		var temp = obj_map.values().find(actor)
 #		return obj_map.keys()[temp]
+	#Add new position of Actor. 
+#	var size1 = actor.size1
+#	var size2 = actor.size2
+#	size2 = size2 + size1
+#	for x in range(size1.x,size2.x):
+#		for y in range(size1.y,size2.y):
+#			for z in range(size1.z,size2.z):
+#				var location = Vector3(grid_location.x+x,grid_location.y+y,grid_location.z+z)
+#				obj_map[location] = actor
+#				print("Charactor Position: ",grid_location)
+##	print(obj_map)
+#
+#func _get_actor_grid(actor):
+#		var temp = obj_map.values().find(actor)
+#		return obj_map.keys()[temp]
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
