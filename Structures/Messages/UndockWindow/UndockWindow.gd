@@ -9,7 +9,7 @@ var obj
 
 onready var camera = get_node("HBoxContainer/ViewportContainer/Viewport/TextureRect/Camera")
 onready var labels = get_node("HBoxContainer/VBoxContainer")
-onready var grid_map = get_node("/root/Main/GridMap")
+
 
 func _process(delta):
 	#changes here are for testing, should probably seperate object windows and actor windows. they're different enough
@@ -17,7 +17,7 @@ func _process(delta):
 	#Perhaps cutout the VBoxContainer to seperete scenes and add as children ? (everything above is standard between them)
 	#poor implementation of camera following. at the moment just testing
 	if obj.is_in_group("Actor"):
-		var grid_location = grid_map._get_actor_grid(obj)
+		var grid_location = obj.translation
 		labels.get_node("Label3").text = str("Grid Loc: ",grid_location)
 		camera.look_at_from_position(obj.translation + Vector3(0,3,3), obj.translation, Vector3(0,1,0))
 	else:

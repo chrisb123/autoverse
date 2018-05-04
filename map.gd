@@ -40,7 +40,7 @@ func _gen_map(pos,size=15): #How long does a grid this size take to create for y
 #	print("Map gen ended")
 
 func _input(event): #This piece of code is for testing charcter movement
-	if event is InputEventMouseButton and gui.mouse_in_main_gui and not Input.is_action_pressed("ui_select"): #its alrteady handled in camera just reference the value
+	if event is InputEventMouseButton and gui.mouse_in_main_gui and not Input.is_action_pressed("ui_select") and not camera.placement: #its alrteady handled in camera just reference the value
 		if event.get_button_index() == 1 and event.is_pressed():
 			var result = camera._mouse_ray(event.position)
 			get_node("/root/Main/CharMap/Character")._click(result) #For testing dont use _click or result

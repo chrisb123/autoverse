@@ -26,18 +26,18 @@ func _ready():
 
 
 func _process(delta):	#probably not the cleanest way of doing it. but works. Character now exists on obj_map like objects.
-	if round(translation.x) != (grid_translation_x): 
-#		grid_translation_x = round(translation.x)
-#		if obj_map._get_grid_contents(Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) == null: #The navigation system should handle this
-		obj_map._set_grid_actor(self,Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) #How does this suppose to function?
-	if round(translation.y) != (grid_translation_y):
-#		grid_translation_y = round(translation.y)
-#		if obj_map._get_grid_contents(Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) == null:
-		obj_map._set_grid_actor(self,Vector3(grid_translation_x,grid_translation_y,grid_translation_z))
-	if round(translation.z) != (grid_translation_z):
-#		grid_translation_z = round(translation.z)
-#		if obj_map._get_grid_contents(Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) == null:
-		obj_map._set_grid_actor(self,Vector3(grid_translation_x,grid_translation_y,grid_translation_z))
+#	if round(translation.x) != (grid_translation_x): 
+##		grid_translation_x = round(translation.x)
+##		if obj_map._get_grid_contents(Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) == null: #The navigation system should handle this
+#		obj_map._set_grid_actor(self,Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) #How does this suppose to function?
+#	if round(translation.y) != (grid_translation_y):
+##		grid_translation_y = round(translation.y)
+##		if obj_map._get_grid_contents(Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) == null:
+#		obj_map._set_grid_actor(self,Vector3(grid_translation_x,grid_translation_y,grid_translation_z))
+#	if round(translation.z) != (grid_translation_z):
+##		grid_translation_z = round(translation.z)
+##		if obj_map._get_grid_contents(Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) == null:
+#		obj_map._set_grid_actor(self,Vector3(grid_translation_x,grid_translation_y,grid_translation_z))
 		
 	if (path.size() > 1): #Can be used to move character
 		var to_walk = delta*SPEED
