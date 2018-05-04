@@ -11,6 +11,13 @@ func _ready():
 	char_map.add_child(tmp)
 	_tick_loop()
 
+func _process(delta):
+	
+	$DirectionalLight.rotation_degrees.x -= delta
+	if $DirectionalLight.rotation_degrees.x < 0:
+		$DirectionalLight.rotation_degrees.x = 360
+
+
 func _tick_loop():
 	while true:
 		for i in obj_map.get_children():

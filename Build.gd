@@ -77,7 +77,7 @@ func _place_object_error():
 	#(Short Text, icon to display, timeout (0s disabled), Longtext ("" = disabled), Object ID,is_undockable)
 	var obj_err = obj_map._is_grid_full(object_to_place) #true returns item id
 	message_window._add_msg(str("Grid ", object_to_place.translation, " occupied!"),"godot",5,"Example long text blah blah blah",obj_err,true) #msg with the works
-	message_window._add_msg(str("Grid ", object_to_place.translation, " occupied!")) #basic message with default values
+#	message_window._add_msg(str("Grid ", object_to_place.translation, " occupied!")) #basic message with default values
 	
 #	remove_child(object_to_place)	#Place it elswhere
 #	_reset_build()

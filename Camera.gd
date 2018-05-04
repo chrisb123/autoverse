@@ -75,7 +75,7 @@ func _input(event):
 			var result = _mouse_ray(event.position)
 			if result:
 				grid_select = _int_position(result.position)
-				emit_signal("grid_selected")
+#				emit_signal("grid_selected") #dbug print out located in main
 				var obj = obj_map._get_grid_contents(grid_select)
 				if obj:
 					var window_to_add = UndockWindow.instance()

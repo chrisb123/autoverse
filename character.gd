@@ -25,7 +25,10 @@ func _ready():
 	end = terr_map.as.get_closest_point(Vector3(0,0,0))
 
 
-func _process(delta):	#probably not the cleanest way of doing it. but works. Character now exists on obj_map like objects.
+func _process(delta):	
+#character is not a fixed object what is the value of all this that getting translation wont solve?
+
+#probably not the cleanest way of doing it. but works. Character now exists on obj_map like objects.
 #	if round(translation.x) != (grid_translation_x): 
 ##		grid_translation_x = round(translation.x)
 ##		if obj_map._get_grid_contents(Vector3(grid_translation_x,grid_translation_y,grid_translation_z)) == null: #The navigation system should handle this
