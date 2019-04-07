@@ -7,10 +7,7 @@ path="res://.import/arm.dae-7b0072deb9e85f7427566a80bee72852.scn"
 [deps]
 
 source_file="res://Models/arm.dae"
-source_md5="5afc392720c43f49ee15763af2843f4a"
-
 dest_files=[ "res://.import/arm.dae-7b0072deb9e85f7427566a80bee72852.scn" ]
-dest_md5="ad758422e2fae93e478e3e7d9acaa874"
 
 [params]
 

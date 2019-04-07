@@ -1,7 +1,7 @@
 extends GridMap
 
 var asID = 0
-var as = AStar.new()
+var astr = AStar.new()
 onready var camera = get_node("/root/Main/Camera")
 onready var gui = get_node("/root/Main/GUI")
 
@@ -21,20 +21,20 @@ func _gen_map(pos,size=15): #How long does a grid this size take to create for y
 		for y in range(-size,size+1):
 			var point = pos + Vector3(x,0,y)
 			if get_cell_item(point.x,point.y,point.z) == INVALID_CELL_ITEM: #if tile map cant be found then add a tile
-				as.add_point(asID, point)
+				astr.add_point(asID, point)
 				set_cell_item(point.x,point.y,point.z,global.tern.GRASS)
 				asID += 1 #generate point list, never alter this variable
 	for x in range(-size,size+1):
 		for y in range(-size,size+1):
 			var point = pos + Vector3(x,0,y)
-			var i = as.get_closest_point(point)
-			var posa = as.get_point_position(i)
+			var i = astr.get_closest_point(point)
+			var posa = astr.get_point_position(i)
 			for x in range(-1,2): #adds missing navigation links to all recently generated points
 				for y in range(-1,2):
 					var posb = posa + Vector3(x,0,y)
-					var j = as.get_closest_point(posb)
-					if i != j and not as.are_points_connected(i,j):
-						as.connect_points(i,j,true) #generate connections
+					var j = astr.get_closest_point(posb)
+					if i != j and not astr.are_points_connected(i,j):
+						astr.connect_points(i,j,true) #generate connections
 					
 #	get_node("/root/Main/CharMap/Character").end = as.get_closest_point(Vector3(0,0,0))
 #	print("Map gen ended")
@@ -48,9 +48,9 @@ func _input(event): #This piece of code is for testing charcter movement
 				
 
 func _remove_point(pos):
-	var id = as.get_closest_point(pos)
-	if as.get_point_position(id).distance_to(pos) < 1:
-		var con = as.get_point_connections(id)
+	var id = astr.get_closest_point(pos)
+	if astr.get_point_position(id).distance_to(pos) < 1:
+		var con = astr.get_point_connections(id)
 		for i in con:
-			as.disconnect_points(id,i) #remove connections
-		as.remove_point(id) #remove point
+			astr.disconnect_points(id,i) #remove connections
+		astr.remove_point(id) #remove point

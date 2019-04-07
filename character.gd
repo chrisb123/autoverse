@@ -22,7 +22,7 @@ onready var terr_map = get_node("/root/Main/TerrMap")
 onready var camera = get_node("/root/Main/Camera")
 
 func _ready():
-	end = terr_map.as.get_closest_point(Vector3(0,0,0))
+	end = terr_map.astr.get_closest_point(Vector3(0,0,0))
 
 
 func _process(delta):	
@@ -109,10 +109,10 @@ func _click(result):
 	if result and path.size() < 2:
 		var grid_select = camera._int_position(result.position)
 		begin = end
-		end = terr_map.as.get_closest_point(grid_select)
-		if grid_select != terr_map.as.get_point_position(end):
+		end = terr_map.astr.get_closest_point(grid_select)
+		if grid_select != terr_map.astr.get_point_position(end):
 			terr_map._gen_map(grid_select)
-			end = terr_map.as.get_closest_point(grid_select)
+			end = terr_map.astr.get_closest_point(grid_select)
 		if not camera.placement:
 			_update_path()
 		else:
@@ -120,7 +120,7 @@ func _click(result):
 
 func _update_path():
 	var curve = Curve3D.new()
-	var p = terr_map.as.get_point_path(begin, end)
+	var p = terr_map.astr.get_point_path(begin, end)
 	path = Array(p) # Vector3array too complex to use, convert to regular array
 	for i in path:
 		curve.add_point(i)
