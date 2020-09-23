@@ -7,29 +7,29 @@ var position
 var put = []
 var get = []
 onready var obj_map = get_node("/root/Main/ObjMap")
-var enabled = false
 
 func _start():
 	position = get_parent().translation
 	print("Obj: The belt specific script")
 	put.append(position + get_parent().facing)
 
-func _tick1():
-	if output_q.size() > 0:
-		for i in put:
-			var j = obj_map._get_grid_contents(i)
-			if j and not j.get_node("Obj").in_q_full:
-				j.get_node("Obj").input_q.push_front(output_q.pop_back())
 	
+func _tick1():
+	if input_q.size() == 0: #Can be fed from 3 sides
+		in_q_full = false
+	else:
+		in_q_full = true
+
 func _tick2():
 	if output_q.size() == 0:
 		var item = input_q.pop_back()
 		if item:
 			output_q.push_front(item)
-	if input_q.size() == 0: #Can be fed from 3 sides
-		in_q_full = false
-	else:
-		in_q_full = true
+	if output_q.size() > 0:
+		for i in put:
+			var j = obj_map._get_grid_contents(i)
+			if j and not j.get_node("Obj").in_q_full:
+				j.get_node("Obj").input_q.push_front(output_q.pop_back())
 
 """
 Method 2, a big problem with the exisiting parent/child link plan is the requirment to link everything 

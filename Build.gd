@@ -65,10 +65,10 @@ func _place_object_allowed():
 	remove_child(object_to_place)	
 	obj_map.add_child(object_to_place)
 	object_to_place._set_facing(object_to_place.rotation_degrees.y)
-	obj_map._set_grid_contents(object_to_place)
+	obj_map._set_grid_contents(object_to_place,true)
 	object_to_place._start() #execute base script methods
-	object_to_place.get_node("Obj")._start() #execute obj specific methods
 	_reset_build()
+	object_to_place.connect("destroy", obj_map, "_set_grid_contents", [false])
 		
 func _place_object_error():
 	print("----- GRID FULL -----")

@@ -8,14 +8,8 @@
 "Object",
 "belt",
 ]]
-
 script = ExtResource( 1 )
-size1 = Vector3( 0, 0, 0 )
 size2 = Vector3( 1, 1, 1 )
 
-[node name="Obj" parent="." index="0" instance=ExtResource( 2 )]
-
+[node name="Obj" parent="." instance=ExtResource( 2 )]
 script = ExtResource( 3 )
-_sections_unfolded = [ "Transform" ]
-
-

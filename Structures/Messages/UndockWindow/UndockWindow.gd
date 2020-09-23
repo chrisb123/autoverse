@@ -27,6 +27,7 @@ func _process(delta):
 		#labels.get_node("Label6").text = str("Output Queue: ",obj.get_node("Obj").output_q)
 		
 func _ready():
+	print("Using modular undock window")
 	set_process(false)
 	self.popup()
 	set_as_toplevel(false)		#This was a BS Problem to find. defaults true, and when true GUI was disabled
@@ -38,6 +39,8 @@ func _initialize(object_id,text):
 		$HBoxContainer.add_child(specific_to_add)
 		specific_to_add._set_labels(object_id,text)
 		window_title = "Object Specific"
+		specific_to_add.enabled = obj.enabled
+		specific_to_add.connect("state", self, "set_state")
 	elif obj.is_in_group("Actor"):
 		var specific_to_add = actor_specific.instance()
 		$HBoxContainer.add_child(specific_to_add)
@@ -46,7 +49,8 @@ func _initialize(object_id,text):
 	_set_camera(object_id)
 	#_set_labels(object_id,text)
 	
-	
+func set_state(value):
+	obj.enabled = value
 	
 func _set_camera(object_id):
 	camera.look_at_from_position(object_id.translation + Vector3(0,3,3), object_id.translation, Vector3(0,1,0))
@@ -70,4 +74,7 @@ func _set_camera(object_id):
 
 
 func _on_CheckButton_toggled(button_pressed):
-	obj.get_node("Obj").enabled = button_pressed
+	obj.enabled = button_pressed
+
+func _on_UndockWindow_popup_hide():
+	queue_free()

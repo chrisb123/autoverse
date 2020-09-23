@@ -6,7 +6,6 @@ var out_q_full = false
 var put = []
 var get = []
 var resource
-var enabled = false
 
 func _ready():
 	var i = randi()%2 
@@ -22,8 +21,6 @@ func _tick1():
 	pass
 	
 func _tick2():
-	if not enabled:
-		return
 	if output_q.size() < 10:
 		out_q_full = false
 		output_q.push_front(resource)

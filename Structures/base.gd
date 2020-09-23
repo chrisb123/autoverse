@@ -8,14 +8,22 @@ var facing = Vector3()
 var up = Vector3(0,1,0)
 var obj
 var flashing
-
-
-
+var timer = 0
+var enabled = false
+signal destroy
 
 func _start():
 	position = translation
 	print("Base: The generic object script")
-
+	get_node("Obj")._start()
+	
+func _process(delta):
+	timer += delta
+	if timer > 0.5:
+		if enabled:
+			$Obj._tick2()
+		$Obj._tick1()
+		timer = 0
 
 	#Set Facing based upon Rotation at placement
 func _set_facing(rotation):
@@ -43,3 +51,7 @@ func _obj_flash_start():
 func _obj_flash_stop():
 	visible = true
 	flashing = false
+
+func destroy():
+	emit_signal("destroy",self)
+	queue_free()

@@ -24,7 +24,7 @@ func _is_grid_full(obj, size1 = null, size2 = null): #now optionally returns id 
 						 return i
 	return false
 
-func _set_grid_contents(object):
+func _set_grid_contents(object,value):
 	var size1 = object.size1
 	var size2 = object.size2
 	size2 = size2 + size1
@@ -32,8 +32,12 @@ func _set_grid_contents(object):
 		for y in range(size1.y,size2.y):
 			for z in range(size1.z,size2.z):
 				var location = Vector3(object.translation.x+x,object.translation.y+y,object.translation.z+z)
-				obj_map[location] = object
-				map._remove_point(location)
+				if value:
+					obj_map[location] = object
+				else:
+					obj_map[location] = null
+				map._set_point(location,value)
+				
 
 func _get_grid_contents(pos):
 	if obj_map.has(pos): 

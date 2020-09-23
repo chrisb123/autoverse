@@ -6,14 +6,7 @@
 [node name="Character" type="Spatial" groups=[
 "Actor",
 ]]
-
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
-size1 = Vector3( 0, 0, 0 )
 size2 = Vector3( 1, 1, 1 )
 
-[node name="Model" parent="." index="0" instance=ExtResource( 2 )]
-
-_sections_unfolded = [ "Transform" ]
-
-
+[node name="Model" parent="." instance=ExtResource( 2 )]

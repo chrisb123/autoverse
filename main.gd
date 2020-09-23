@@ -9,7 +9,7 @@ func _ready():
 	camera.connect("grid_selected",self,"_grid_selected")
 	var tmp = character.instance()
 	char_map.add_child(tmp)
-	_tick_loop()
+#	_tick_loop()
 
 func _process(delta):
 	
@@ -18,16 +18,16 @@ func _process(delta):
 		$DirectionalLight.rotation_degrees.x = 360
 
 
-func _tick_loop():
-	while true:
-		for i in obj_map.get_children():
-			if ! i.is_in_group("Actor"):
-				i.get_node("Obj")._tick1()
-		yield(get_tree().create_timer(.5),"timeout")
-		for i in obj_map.get_children():
-			if ! i.is_in_group("Actor"):
-				i.get_node("Obj")._tick2()
-		yield(get_tree().create_timer(.5),"timeout")
+#func _tick_loop():
+#	while true:
+#		for i in obj_map.get_children():
+#			if ! i.is_in_group("Actor"):
+#				i.get_node("Obj")._tick1()
+#		yield(get_tree().create_timer(.5),"timeout")
+#		for i in obj_map.get_children():
+#			if ! i.is_in_group("Actor"):
+#				i.get_node("Obj")._tick2()
+#		yield(get_tree().create_timer(.5),"timeout")
 
 func _grid_selected():
 	var pos = camera._get_grid_select()

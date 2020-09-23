@@ -5,10 +5,8 @@ extends VBoxContainer
 # var b = "textvar"
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
+	print("actor specif")
+	
 func _set_labels(object_id,text):
 	#only examples
 	$Label.text = str("Character: ",text)

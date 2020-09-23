@@ -47,10 +47,12 @@ func _input(event): #This piece of code is for testing charcter movement
 			
 				
 
-func _remove_point(pos):
-	var id = astr.get_closest_point(pos)
+func _set_point(pos,value):
+	
+	var id = astr.get_closest_point(pos,true)
 	if astr.get_point_position(id).distance_to(pos) < 1:
-		var con = astr.get_point_connections(id)
-		for i in con:
-			astr.disconnect_points(id,i) #remove connections
-		astr.remove_point(id) #remove point
+		astr.set_point_disabled(id,value)
+#		var con = astr.get_point_connections(id)
+#		for i in con:
+#			astr.disconnect_points(id,i) #remove connections
+#		astr.remove_point(id) #remove point

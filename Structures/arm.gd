@@ -7,7 +7,6 @@ var position
 var put = []
 var get = []
 onready var obj_map = get_node("/root/Main/ObjMap")
-var enabled = false
 
 func _start():
 	position = get_parent().translation
@@ -17,10 +16,15 @@ func _start():
 
 func _tick1():
 	if input_q.size() < 1:
+		in_q_full = false
 		for i in get:
 			var j = obj_map._get_grid_contents(i)
 			if j:
-				input_q.push_front(j.get_node("Obj").output_q.pop_back())
+				var t = j.get_node("Obj").output_q.pop_back()
+				if t:
+					input_q.push_front(t)
+	else:
+		in_q_full = true
 	if output_q.size() > 0:
 		for i in put:
 			var j = obj_map._get_grid_contents(i)
@@ -32,7 +36,4 @@ func _tick2():
 		var item = input_q.pop_back()
 		if item:
 			output_q.push_front(item)
-	if input_q.size() < 1:
-		in_q_full = false
-	else:
-		in_q_full = true
+
